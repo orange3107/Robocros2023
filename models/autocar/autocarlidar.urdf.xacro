@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<robot name="basic_shapes" xmlns:xacro="http://wiki.ros.org/xacro">
+
+    <!-- basic shapes -->
+    <xacro:include filename="$(find urdf_basic_shapes)/urdf/basic_shapes.urdf.xacro"/>
+    
+
+    
+
+    <link name="base_footprint"/>
+
+    <!-- cubeical base_link -->
+     <xacro:cube name="base_link" x="2" y="1" z="1" ori="-.5 0 .5" rpy="0 0 0" rgb="Orange" m="2" friction="${standard_friction}"/>
+    <joint name="cube1_joint" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+   
+    <!-- Veldoyne Lidar  -->
+    <xacro:include filename="$(find my_box_bot_gazebo)/models/velodyne/urdf/HDL-32E.urdf.xacro"/>
+    <xacro:HDL-32E parent="base_link" name="velodyne" topic="velodyne_points" hz="10" samples="440" gpu="false">
+    <origin xyz="0 0 2" rpy="0 0 0"/>
+    </xacro:HDL-32E>
+
+</robot>

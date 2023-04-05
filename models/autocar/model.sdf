@@ -1,0 +1,699 @@
+<?xml version="1.0"?>
+<sdf version="1.5">
+
+  <model name="autocar">
+    <pose>0 0 0.0 0 0 0</pose>
+   
+
+    <link name='base_link' />
+
+    <joint name='chassis_link_joint' type='fixed'>
+      <pose>1e-06 0.07307 0.65096 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>chassis_link</child>
+    </joint>
+
+    <joint name="hokuyo_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>hokuyo_link</child>
+      <pose>0 2.34 0.72 0 0 1.5708</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+    
+    <joint name="velodyne_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>velodyne_link</child>
+      <pose>0 0 1.85 0 0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    <joint name="front_camera_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>front_camera_link</child>
+      <pose>0 0 0 0 0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+
+  <link name="front_camera_link">
+
+  <pose>0 0 1.4 0 0 1.57</pose>
+
+  <visual name="camera_visual">
+    <pose relative_to='front_camera_joint'> 0 0 0 0 0 0 </pose>
+    <geometry>
+      <box>
+        <size>0.015 0.08 0.022</size>
+      </box>
+    </geometry>
+    <material>
+      <ambient>0 0 0 1.0</ambient>
+      <diffuse>0 0 0 1.0</diffuse>
+      <specular>0.0 0.0 0.0 1.0</specular>
+      <emissive>0.0 0.0 0.0 1.0</emissive>
+    </material>
+  </visual>    
+   
+  <sensor name="front_camera" type="camera">
+    <always_on>true</always_on>
+    <visualize>true</visualize>
+    <update_rate>30</update_rate>
+    <camera name="camera">
+      <horizontal_fov>1.2962634</horizontal_fov>
+      <image>
+        <width>1280</width>
+        <height>720</height>
+        <format>R8G8B8</format>
+      </image>
+      <clip>
+        <near>0.02</near>
+        <far>500</far>
+      </clip>
+      <noise>
+        <type>gaussian</type>
+        <!-- Noise is sampled independently per pixel on each frame.
+             That pixel's noise value is added to each of its color
+              channels, which at that point lie in the range [0,1]. -->
+        <mean>0.0</mean>
+        <stddev>0.007</stddev>
+      </noise>
+    </camera>
+
+    <plugin name="front_camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>false</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>/prius/front_camera</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>/prius/front_camera/camera_info</cameraInfoTopicName>
+        <frameName>front_camera_link</frameName>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+
+  </sensor>
+ 
+  </link>
+
+    <link name="velodyne_link">
+
+      <inertial>
+        <pose relative_to='velodyne_joint'> 0 0 0 0 0 0 </pose>
+        <mass>1.01</mass>
+        <inertia>
+          <ixx>0.00219251</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00219251</iyy>
+          <iyz>0</iyz>
+          <izz>0.000910464</izz>
+        </inertia>
+      </inertial>
+           
+      <collision name='base_link_fixed_joint_lump__velodyne2_base_link_collision'>
+         <pose relative_to='velodyne_joint'> 0 0 0 0 0 0 </pose>
+        <geometry>
+          <cylinder>
+            <length>0.14424</length>
+            <radius>0.04267</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      
+      <visual name='base_link_fixed_joint_lump__velodyne2_base_link_visual'>
+        <pose relative_to='velodyne_joint'> 0 0 0 0 0 0 </pose>
+        <geometry>
+          <cylinder>
+            <length>0.14424</length>
+            <radius>0.04267</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+      
+      <sensor name='velodyne2-HDL32E' type='ray'>
+
+        <visualize>false</visualize>
+        <update_rate>10</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>220</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.7853981</min_angle>
+              <max_angle>3.9269908</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>32</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.535292</min_angle>
+              <max_angle>0.186227</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.3</min>
+            <max>131</max>
+            <resolution>0.001</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0</mean>
+            <stddev>0</stddev>
+          </noise>
+        </ray>
+        <plugin name='gazebo_ros_laser_controller' filename='libgazebo_ros_velodyne_laser.so'>
+          <ros>
+            <namespace>/velodyne</namespace>
+            <remapping>~/out:=/velodyne_points2</remapping>
+          </ros>
+          <tf_prefix/>
+          <frame_name>velodyne_link</frame_name>
+          <organize_cloud>0</organize_cloud>
+          <min_range>2.5</min_range>
+          <max_range>130.0</max_range>
+          <gaussian_noise>0.008</gaussian_noise>
+        </plugin>
+        <pose relative_to='velodyne_joint'> 0 0 0 0 0 0 </pose>
+      </sensor>
+    </link>
+
+
+    <link name="hokuyo_link">
+      <sensor name="head_hokuyo_sensor" type="ray">
+      <pose relative_to='hokuyo_joint'>0 0 0 0 0 0</pose>
+        <always_on>false</always_on>
+        <visualize>false</visualize>
+        <update_rate>40</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>720</samples>
+              <resolution>1.000000</resolution>
+              <min_angle>-1.570796</min_angle>
+              <max_angle>1.570796</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.120000</min>
+            <max>30.0</max>
+            <resolution>0.010</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </ray>
+        <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_ray_sensor.so">
+          <ros>
+            <remapping>~/out:=scan</remapping>
+          </ros>
+          <output_type>sensor_msgs/LaserScan</output_type>
+          <frame_name>hokuyo_link</frame_name>
+        </plugin>
+      </sensor>
+    </link>
+    
+
+    <link name='chassis_link'>
+      <inertial>
+        <pose>1e-06 0.07307 0.65096 0 -0 0</pose>
+        <mass>1580</mass>
+        <inertia>
+          <ixx>1997.86</ixx>
+          <ixy>-3e-05</ixy>
+          <ixz>-1e-06</ixz>
+          <iyy>442.769</iyy>
+          <iyz>62.5206</iyz>
+          <izz>2238.05</izz>
+        </inertia>
+      </inertial>
+      <collision name='chassis_link_fixed_joint_lump__chassis_link_collision'>
+        <pose>0 0 0.46936 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://autocar/meshes/chassis_link.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode />
+          </contact>
+          <friction>
+            <ode>
+              <mu>0.2</mu>
+              <mu2>0.2</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='chassis_link_fixed_joint_lump__spoiler_link_collision_1'>
+        <pose>0 0.05 0.41936 1.5708 -0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://autocar/meshes/spoiler.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode />
+          </contact>
+          <friction>
+            <ode>
+              <mu>0.2</mu>
+              <mu2>0.2</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='chassis_link_fixed_joint_lump__chassis_link_visual'>
+        <pose>0 0 0.46936 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://autocar/meshes/chassis_link.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='chassis_link_fixed_joint_lump__spoiler_link_visual_1'>
+        <pose>0 0.05 0.41936 1.5708 -0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://autocar/meshes/spoiler.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <!-- <velocity_decay/> -->
+      <!--  <gravity>1</gravity> -->
+      <!--  <gravity>1</gravity> -->
+      <!-- <velocity_decay/> -->
+      <self_collide>1</self_collide>
+      <!--  <gravity>1</gravity> -->
+    </link>
+
+    <joint name='bl_axle' type='revolute'>
+      <pose relative_to='chassis_link'>-0.875 -1.01364 0.324997 0 -0 0</pose>
+      <parent>chassis_link</parent>
+      <child>bl_1</child>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <dynamics>
+          <friction>12.031606150200002</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='bl_1'>
+      <pose relative_to='bl_axle'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.0377 0 -0 0 -0 0</pose>
+        <mass>24.5</mass>
+        <inertia>
+          <ixx>1.84514</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.04961</iyy>
+          <iyz>0</iyz>
+          <izz>1.04961</izz>
+        </inertia>
+      </inertial>
+      <collision name='bl_1_collision'>
+        <pose relative_to='bl_axle'>0 0 0 0 1.5708 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>.3425</radius>
+            <length>.22</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode />
+          </contact>
+          <friction>
+            <ode>
+              <mu>1.7</mu>
+              <mu2>1.7</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='bl_1_visual'>
+        <pose>0.875 1.0136 0.1444 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://autocar/meshes/bl_1.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <!--  <gravity>1</gravity> -->
+      <!-- <velocity_decay/> -->
+      <self_collide>1</self_collide>
+    </link>
+    <joint name='br_axle' type='revolute'>
+      <pose relative_to='chassis_link'>0.875 -1.01364 0.324997 0 -0 0</pose>
+      <parent>chassis_link</parent>
+      <child>br_1</child>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <dynamics>
+          <friction>12.031606150200002</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='br_1'>
+      <pose relative_to='br_axle'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.0377 0 -0 0 -0 0</pose>
+        <mass>24.5</mass>
+        <inertia>
+          <ixx>1.84514</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.04961</iyy>
+          <iyz>0</iyz>
+          <izz>1.04961</izz>
+        </inertia>
+      </inertial>
+      <collision name='br_1_collision'>
+        <pose relative_to='br_axle'>0 0 0 0 1.5708 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>.3425</radius>
+            <length>.22</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode />
+          </contact>
+          <friction>
+            <ode>
+              <mu>1.7</mu>
+              <mu2>1.7</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='br_1_visual'>
+        <pose>-0.875 1.0136 0.1444 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://autocar/meshes/br_1.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <!--  <gravity>1</gravity> -->
+      <!-- <velocity_decay/> -->
+      <self_collide>1</self_collide>
+    </link>
+    <joint name='l_steer' type='revolute'>
+      <pose relative_to='chassis_link'>-0.825 1.51736 0.324997 0 -0 0</pose>
+      <parent>chassis_link</parent>
+      <child>l_steer_1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-0.95</lower>
+          <upper>0.95</upper>
+        </limit>
+        <dynamics>
+          <friction>18.0474092253</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='l_steer_1'>
+      <pose relative_to='l_steer'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.003381 0 0.02162 0 -0 0</pose>
+        <mass>1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <!--  <gravity>1</gravity> -->
+      <!-- <velocity_decay/> -->
+      <self_collide>1</self_collide>
+    </link>
+
+    <joint name='fl_axle' type='revolute'>
+      <pose relative_to='l_steer_1'>-0.05 0 0 0 -0 0</pose>
+      <parent>l_steer_1</parent>
+      <child>fl_1</child>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <dynamics>
+          <friction>12.031606150200002</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='fl_1'>
+      <pose relative_to='fl_axle'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.0377 0 -0 0 -0 0</pose>
+        <mass>24.5</mass>
+        <inertia>
+          <ixx>1.84514</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.04961</iyy>
+          <iyz>0</iyz>
+          <izz>1.04961</izz>
+        </inertia>
+      </inertial>
+      <collision name='fl_1_collision'>
+        <pose>0.875 -1.5174 0.1444 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://autocar/meshes/fl_1.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode />
+          </contact>
+          <friction>
+            <ode>
+              <mu>1.1</mu>
+              <mu2>1.1</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='fl_1_visual'>
+        <pose>0.875 -1.5174 0.1444 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://autocar/meshes/fl_1.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <!--  <gravity>1</gravity> -->
+      <!-- <velocity_decay/> -->
+      <self_collide>1</self_collide>
+    </link>
+    <joint name='r_steer' type='revolute'>
+      <pose relative_to='chassis_link'>0.825 1.51736 0.324997 0 -0 0</pose>
+      <parent>chassis_link</parent>
+      <child>r_steer_1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-0.95</lower>
+          <upper>0.95</upper>
+        </limit>
+        <dynamics>
+          <damping>0.01</damping>
+          <friction>18.0474092253</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='r_steer_1'>
+      <pose relative_to='r_steer'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.003381 0 0.02162 0 -0 0</pose>
+        <mass>1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <!--  <gravity>1</gravity> -->
+      <!-- <velocity_decay/> -->
+      <self_collide>1</self_collide>
+    </link>
+    <joint name='fr_axle' type='revolute'>
+      <pose relative_to='r_steer_1'>0.05 0 0 0 -0 0</pose>
+      <parent>r_steer_1</parent>
+      <child>fr_1</child>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <dynamics>
+          <friction>12.031606150200002</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='fr_1'>
+      <pose relative_to='fr_axle'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.0377 0 -0 0 -0 0</pose>
+        <mass>24.5</mass>
+        <inertia>
+          <ixx>1.84514</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.04961</iyy>
+          <iyz>0</iyz>
+          <izz>1.04961</izz>
+        </inertia>
+      </inertial>
+      <collision name='fr_1_collision'>
+        <pose>-0.875 -1.5174 0.1444 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://autocar/meshes/fr_1.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode />
+          </contact>
+          <friction>
+            <ode>
+              <mu>1.7</mu>
+              <mu2>1.7</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='fr_1_visual'>
+        <pose>-0.875 -1.5174 0.1444 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://autocar/meshes/fr_1.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <!--  <gravity>1</gravity> -->
+      <!-- <velocity_decay/> -->
+      <self_collide>1</self_collide>
+    </link>
+
+    <link name="steering_wheel" />
+
+    <joint name="steering_joint" type="revolute">
+      <pose>-0.002 0 0 0 0 0</pose>
+      <parent>chassis_link</parent>
+      <child>steering_wheel</child>
+      <axis>
+        <xyz>-0.964118 0.000768 0.265556</xyz>
+        <limit>
+          <lower>-100</lower>
+          <upper>100</upper>
+        </limit>
+        <dynamics>
+          <damping>1.0</damping>
+        </dynamics>
+        <use_parent_model_frame>true</use_parent_model_frame>
+      </axis>
+      <physics>
+        <ode>
+          <cfm_damping>1</cfm_damping>
+        </ode>
+      </physics>
+    </joint>
+<!--
+    <plugin name='p3d_base_controller' filename='libgazebo_ros_p3d.so'>
+      <ros>
+        <namespace>p3d</namespace>
+        <remapping>odom:=odom</remapping>
+      </ros>
+      <update_rate>1</update_rate>
+      <body_name>base_link</body_name>
+      <frame_name>world</frame_name>
+      <xyz_offset>0 0 0</xyz_offset>
+      <rpy_offset>0 0 0</rpy_offset>
+      <gaussian_noise>0.01</gaussian_noise>
+    </plugin>
+
+-->
+
+
+    <plugin name='ackermann_drive' filename='libgazebo_ros_ackermann_drive.so'>
+
+      <ros>
+        <namespace>autocar</namespace>
+        <remapping>cmd_vel:=cmd_vel</remapping>
+        <remapping>odom:=odom</remapping>
+        <remapping>distance:=distance</remapping>
+      </ros>
+
+      <update_rate>100.0</update_rate>
+
+      <!-- wheels -->
+      <front_left_joint>fl_axle</front_left_joint>
+      <front_right_joint>fr_axle</front_right_joint>
+      <rear_left_joint>bl_axle</rear_left_joint>
+      <rear_right_joint>br_axle</rear_right_joint>
+      <left_steering_joint>l_steer</left_steering_joint>
+      <right_steering_joint>r_steer</right_steering_joint>
+      <steering_wheel_joint>steering_joint</steering_wheel_joint>
+
+
+      <!-- Max absolute steer angle for tyre in radians-->
+      <!-- Any cmd_vel angular z greater than this would be capped -->
+      <max_steer>0.85</max_steer>
+
+      <!-- Max absolute steering angle of steering wheel -->
+      <!-- Max absolute steering angle of steering wheel -->
+      <max_steering_angle>7.85</max_steering_angle>
+
+      <!-- Max absolute linear speed in m/s -->
+      <max_speed>20</max_speed>
+
+      <!-- PID tuning -->
+      <left_steering_pid_gain>4000 0 1</left_steering_pid_gain>
+      <left_steering_i_range>0 0</left_steering_i_range>
+      <right_steering_pid_gain>4000 0 1</right_steering_pid_gain>
+      <right_steering_i_range>0 0</right_steering_i_range>
+      <linear_velocity_pid_gain>4000 0 1</linear_velocity_pid_gain>
+      <linear_velocity_i_range>0 0</linear_velocity_i_range>
+
+      <!-- output -->
+      <publish_odom>false</publish_odom>
+      <publish_odom_tf>false</publish_odom_tf>
+      <publish_wheel_tf>true</publish_wheel_tf>
+      <publish_distance>true</publish_distance>
+
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+
+    </plugin>
+
+  </model>
+
+</sdf>

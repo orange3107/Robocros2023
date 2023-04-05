@@ -1,0 +1,9 @@
+/home/ilya22/ros2_humble/src/my_box_bot_gazebo/build/my_box_bot_gazebo/CMakeFiles/uninstall.dir
+/home/ilya22/ros2_humble/src/my_box_bot_gazebo/build/my_box_bot_gazebo/CMakeFiles/my_box_bot_gazebo_uninstall.dir
+/home/ilya22/ros2_humble/src/my_box_bot_gazebo/build/my_box_bot_gazebo/CMakeFiles/test.dir
+/home/ilya22/ros2_humble/src/my_box_bot_gazebo/build/my_box_bot_gazebo/CMakeFiles/edit_cache.dir
+/home/ilya22/ros2_humble/src/my_box_bot_gazebo/build/my_box_bot_gazebo/CMakeFiles/rebuild_cache.dir
+/home/ilya22/ros2_humble/src/my_box_bot_gazebo/build/my_box_bot_gazebo/CMakeFiles/list_install_components.dir
+/home/ilya22/ros2_humble/src/my_box_bot_gazebo/build/my_box_bot_gazebo/CMakeFiles/install.dir
+/home/ilya22/ros2_humble/src/my_box_bot_gazebo/build/my_box_bot_gazebo/CMakeFiles/install/local.dir
+/home/ilya22/ros2_humble/src/my_box_bot_gazebo/build/my_box_bot_gazebo/CMakeFiles/install/strip.dir

@@ -1,0 +1,1610 @@
+<sdf version='1.7'>
+  <world name='default'>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>1</shadows>
+    </scene>
+    <audio>
+      <device>default</device>
+    </audio>
+    <wind/>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <model name='robocross'>
+      <pose>0 0 0.2 0 -0 0</pose>
+      <link name='base_link'>
+        <self_collide>0</self_collide>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+          <mass>1</mass>
+        </inertial>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='chassis_link_joint' type='fixed'>
+        <pose>1e-06 0.07307 0.65096 0 -0 0</pose>
+        <parent>base_link</parent>
+        <child>chassis_link</child>
+      </joint>
+      <joint name='hokuyo_joint' type='fixed'>
+        <parent>base_link</parent>
+        <child>hokuyo_link</child>
+        <pose>0 2.34 0.72 0 -0 1.5708</pose>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+        </axis>
+      </joint>
+      <joint name='velodyne_joint' type='fixed'>
+        <parent>base_link</parent>
+        <child>velodyne_link</child>
+        <pose>0 0 1.85 0 -0 0</pose>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+        </axis>
+      </joint>
+      <link name='velodyne_link'>
+        <inertial>
+          <pose relative_to='velodyne_joint'>0 0 0 0 -0 0</pose>
+          <mass>1.01</mass>
+          <inertia>
+            <ixx>0.00219251</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00219251</iyy>
+            <iyz>0</iyz>
+            <izz>0.000910464</izz>
+          </inertia>
+        </inertial>
+        <collision name='base_link_fixed_joint_lump__velodyne2_base_link_collision'>
+          <pose relative_to='velodyne_joint'>0 0 0 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.14424</length>
+              <radius>0.04267</radius>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='base_link_fixed_joint_lump__velodyne2_base_link_visual'>
+          <pose relative_to='velodyne_joint'>0 0 0 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.14424</length>
+              <radius>0.04267</radius>
+            </cylinder>
+          </geometry>
+        </visual>
+        <sensor name='velodyne2-HDL32E' type='ray'>
+          <visualize>0</visualize>
+          <update_rate>10</update_rate>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>220</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.785398</min_angle>
+                <max_angle>3.92699</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>32</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.535292</min_angle>
+                <max_angle>0.186227</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.3</min>
+              <max>131</max>
+              <resolution>0.001</resolution>
+            </range>
+            <noise>
+              <type>gaussian</type>
+              <mean>0</mean>
+              <stddev>0</stddev>
+            </noise>
+          </ray>
+          <plugin name='gazebo_ros_laser_controller' filename='libgazebo_ros_velodyne_laser.so'>
+            <ros>
+              <namespace>/velodyne</namespace>
+              <remapping>~/out:=/velodyne_points2</remapping>
+            </ros>
+            <tf_prefix/>
+            <frame_name>velodyne_link</frame_name>
+            <organize_cloud>0</organize_cloud>
+            <min_range>2.5</min_range>
+            <max_range>130.0</max_range>
+            <gaussian_noise>0.008</gaussian_noise>
+          </plugin>
+          <pose relative_to='velodyne_joint'>0 0 0 0 -0 0</pose>
+        </sensor>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='hokuyo_link'>
+        <sensor name='head_hokuyo_sensor' type='ray'>
+          <pose relative_to='hokuyo_joint'>0 0 0 0 -0 0</pose>
+          <always_on>1</always_on>
+          <visualize>1</visualize>
+          <update_rate>40</update_rate>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>720</samples>
+                <resolution>1</resolution>
+                <min_angle>-1.5708</min_angle>
+                <max_angle>1.5708</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>1</samples>
+                <min_angle>0</min_angle>
+                <max_angle>0</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.12</min>
+              <max>30</max>
+              <resolution>0.01</resolution>
+            </range>
+            <noise>
+              <type>gaussian</type>
+              <mean>0</mean>
+              <stddev>0.01</stddev>
+            </noise>
+          </ray>
+          <plugin name='gazebo_ros_head_hokuyo_controller' filename='libgazebo_ros_ray_sensor.so'>
+            <ros>
+              <remapping>~/out:=scan</remapping>
+            </ros>
+            <output_type>sensor_msgs/LaserScan</output_type>
+            <frame_name>hokuyo_link</frame_name>
+          </plugin>
+        </sensor>
+        <self_collide>0</self_collide>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+          <mass>1</mass>
+        </inertial>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='chassis_link'>
+        <inertial>
+          <pose>1e-06 0.07307 0.65096 0 -0 0</pose>
+          <mass>1580</mass>
+          <inertia>
+            <ixx>1997.86</ixx>
+            <ixy>-3e-05</ixy>
+            <ixz>-1e-06</ixz>
+            <iyy>442.769</iyy>
+            <iyz>62.5206</iyz>
+            <izz>2238.05</izz>
+          </inertia>
+        </inertial>
+        <collision name='chassis_link_fixed_joint_lump__chassis_link_collision'>
+          <pose>0 0 0.46936 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>model://autocar/meshes/chassis_link.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>0.2</mu>
+                <mu2>0.2</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='chassis_link_fixed_joint_lump__spoiler_link_collision_1'>
+          <pose>0 0.05 0.41936 1.5708 -0 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>model://autocar/meshes/spoiler.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>0.2</mu>
+                <mu2>0.2</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='chassis_link_fixed_joint_lump__chassis_link_visual'>
+          <pose>0 0 0.46936 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>model://autocar/meshes/chassis_link.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='chassis_link_fixed_joint_lump__spoiler_link_visual_1'>
+          <pose>0 0.05 0.41936 1.5708 -0 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>model://autocar/meshes/spoiler.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>1</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='bl_axle' type='revolute'>
+        <pose relative_to='chassis_link'>-0.875 -1.01364 0.324997 0 -0 0</pose>
+        <parent>chassis_link</parent>
+        <child>bl_1</child>
+        <axis>
+          <xyz>-1 0 0</xyz>
+          <dynamics>
+            <friction>12.0316</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+        </axis>
+      </joint>
+      <link name='bl_1'>
+        <pose relative_to='bl_axle'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>-0.0377 0 -0 0 -0 0</pose>
+          <mass>24.5</mass>
+          <inertia>
+            <ixx>1.84514</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1.04961</iyy>
+            <iyz>0</iyz>
+            <izz>1.04961</izz>
+          </inertia>
+        </inertial>
+        <collision name='bl_1_collision'>
+          <pose relative_to='bl_axle'>0 0 0 3.14159 1.57079 3.14159</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.3425</radius>
+              <length>0.22</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>1.7</mu>
+                <mu2>1.7</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='bl_1_visual'>
+          <pose>0.875 1.0136 0.1444 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>model://autocar/meshes/bl_1.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>1</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='br_axle' type='revolute'>
+        <pose relative_to='chassis_link'>0.875 -1.01364 0.324997 0 -0 0</pose>
+        <parent>chassis_link</parent>
+        <child>br_1</child>
+        <axis>
+          <xyz>-1 0 0</xyz>
+          <dynamics>
+            <friction>12.0316</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+        </axis>
+      </joint>
+      <link name='br_1'>
+        <pose relative_to='br_axle'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>-0.0377 0 -0 0 -0 0</pose>
+          <mass>24.5</mass>
+          <inertia>
+            <ixx>1.84514</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1.04961</iyy>
+            <iyz>0</iyz>
+            <izz>1.04961</izz>
+          </inertia>
+        </inertial>
+        <collision name='br_1_collision'>
+          <pose relative_to='br_axle'>0 0 0 3.14159 1.57079 3.14159</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.3425</radius>
+              <length>0.22</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>1.7</mu>
+                <mu2>1.7</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='br_1_visual'>
+          <pose>-0.875 1.0136 0.1444 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>model://autocar/meshes/br_1.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>1</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='l_steer' type='revolute'>
+        <pose relative_to='chassis_link'>-0.825 1.51736 0.324997 0 -0 0</pose>
+        <parent>chassis_link</parent>
+        <child>l_steer_1</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-0.95</lower>
+            <upper>0.95</upper>
+          </limit>
+          <dynamics>
+            <friction>18.0474</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='l_steer_1'>
+        <pose relative_to='l_steer'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0.003381 0 0.02162 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <self_collide>1</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='fl_axle' type='revolute'>
+        <pose relative_to='l_steer_1'>-0.05 0 0 0 -0 0</pose>
+        <parent>l_steer_1</parent>
+        <child>fl_1</child>
+        <axis>
+          <xyz>-1 0 0</xyz>
+          <dynamics>
+            <friction>12.0316</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+        </axis>
+      </joint>
+      <link name='fl_1'>
+        <pose relative_to='fl_axle'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>-0.0377 0 -0 0 -0 0</pose>
+          <mass>24.5</mass>
+          <inertia>
+            <ixx>1.84514</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1.04961</iyy>
+            <iyz>0</iyz>
+            <izz>1.04961</izz>
+          </inertia>
+        </inertial>
+        <collision name='fl_1_collision'>
+          <pose>0.875 -1.5174 0.1444 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>model://autocar/meshes/fl_1.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>1.1</mu>
+                <mu2>1.1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='fl_1_visual'>
+          <pose>0.875 -1.5174 0.1444 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>model://autocar/meshes/fl_1.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>1</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='r_steer' type='revolute'>
+        <pose relative_to='chassis_link'>0.825 1.51736 0.324997 0 -0 0</pose>
+        <parent>chassis_link</parent>
+        <child>r_steer_1</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-0.95</lower>
+            <upper>0.95</upper>
+          </limit>
+          <dynamics>
+            <damping>0.01</damping>
+            <friction>18.0474</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='r_steer_1'>
+        <pose relative_to='r_steer'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0.003381 0 0.02162 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <self_collide>1</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='fr_axle' type='revolute'>
+        <pose relative_to='r_steer_1'>0.05 0 0 0 -0 0</pose>
+        <parent>r_steer_1</parent>
+        <child>fr_1</child>
+        <axis>
+          <xyz>-1 0 0</xyz>
+          <dynamics>
+            <friction>12.0316</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+        </axis>
+      </joint>
+      <link name='fr_1'>
+        <pose relative_to='fr_axle'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>-0.0377 0 -0 0 -0 0</pose>
+          <mass>24.5</mass>
+          <inertia>
+            <ixx>1.84514</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1.04961</iyy>
+            <iyz>0</iyz>
+            <izz>1.04961</izz>
+          </inertia>
+        </inertial>
+        <collision name='fr_1_collision'>
+          <pose>-0.875 -1.5174 0.1444 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>model://autocar/meshes/fr_1.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>1.7</mu>
+                <mu2>1.7</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='fr_1_visual'>
+          <pose>-0.875 -1.5174 0.1444 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>model://autocar/meshes/fr_1.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>1</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='steering_wheel'>
+        <self_collide>0</self_collide>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+          <mass>1</mass>
+        </inertial>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='steering_joint' type='revolute'>
+        <pose>-0.002 0 0 0 -0 0</pose>
+        <parent>chassis_link</parent>
+        <child>steering_wheel</child>
+        <axis>
+          <xyz expressed_in='__model__'>-0.964118 0.000768 0.265556</xyz>
+          <limit>
+            <lower>-100</lower>
+            <upper>100</upper>
+          </limit>
+          <dynamics>
+            <damping>1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+        <physics>
+          <ode>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <plugin name='ackermann_drive' filename='libgazebo_ros_ackermann_drive.so'>
+        <ros>
+          <namespace>autocar</namespace>
+          <remapping>cmd_vel:=cmd_vel</remapping>
+          <remapping>odom:=odom</remapping>
+          <remapping>distance:=distance</remapping>
+        </ros>
+        <update_rate>100.0</update_rate>
+        <front_left_joint>fl_axle</front_left_joint>
+        <front_right_joint>fr_axle</front_right_joint>
+        <rear_left_joint>bl_axle</rear_left_joint>
+        <rear_right_joint>br_axle</rear_right_joint>
+        <left_steering_joint>l_steer</left_steering_joint>
+        <right_steering_joint>r_steer</right_steering_joint>
+        <steering_wheel_joint>steering_joint</steering_wheel_joint>
+        <max_steer>0.85</max_steer>
+        <max_steering_angle>7.85</max_steering_angle>
+        <max_speed>20</max_speed>
+        <left_steering_pid_gain>4000 0 1</left_steering_pid_gain>
+        <left_steering_i_range>0 0</left_steering_i_range>
+        <right_steering_pid_gain>4000 0 1</right_steering_pid_gain>
+        <right_steering_i_range>0 0</right_steering_i_range>
+        <linear_velocity_pid_gain>4000 0 1</linear_velocity_pid_gain>
+        <linear_velocity_i_range>0 0</linear_velocity_i_range>
+        <publish_odom>0</publish_odom>
+        <publish_odom_tf>0</publish_odom_tf>
+        <publish_wheel_tf>1</publish_wheel_tf>
+        <publish_distance>1</publish_distance>
+        <odometry_frame>odom</odometry_frame>
+        <robot_base_frame>base_link</robot_base_frame>
+      </plugin>
+    </model>
+    <state world_name='default'>
+      <sim_time>139 548000000</sim_time>
+      <real_time>41 485890424</real_time>
+      <wall_time>1678051348 442990577</wall_time>
+      <iterations>24272</iterations>
+      <model name='bus'>
+        <pose>-10.0774 0.821677 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-10.0774 0.821677 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='bus_clone'>
+        <pose>-10.0177 13.2978 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-10.0177 13.2978 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='bus_clone_0'>
+        <pose>-8.7231 -12.8588 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-8.7231 -12.8588 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='bus_clone_1'>
+        <pose>17.2 -9.8502 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>17.2 -9.8502 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='bus_clone_1_clone'>
+        <pose>-0.844983 -13.9208 0 0 -0 1.55226</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-0.844983 -13.9208 0 0 -0 1.55226</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='bus_clone_1_clone_0'>
+        <pose>10.9298 -17.4711 0 0 -0 1.55226</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>10.9298 -17.4711 0 0 -0 1.55226</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='bus_clone_1_clone_1'>
+        <pose>22.7815 -17.7074 0 0 -0 1.55226</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>22.7815 -17.7074 0 0 -0 1.55226</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='bus_clone_1_clone_1_clone'>
+        <pose>-5.82419 20.0722 0 0 -0 1.55226</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-5.82419 20.0722 0 0 -0 1.55226</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='bus_clone_1_clone_1_clone_0'>
+        <pose>5.70532 17.7185 0 0 -0 1.55226</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>5.70532 17.7185 0 0 -0 1.55226</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='bus_clone_1_clone_1_clone_1'>
+        <pose>17.0254 19.0914 0 0 -0 1.55226</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>17.0254 19.0914 0 0 -0 1.55226</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='bus_clone_1_clone_1_clone_2'>
+        <pose>25.6738 21.1377 0 0 -0 1.55226</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>25.6738 21.1377 0 0 -0 1.55226</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='bus_clone_2'>
+        <pose>27.2296 -10.9295 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>27.2296 -10.9295 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='bus_clone_3'>
+        <pose>27.3753 1.19888 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>27.3753 1.19888 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='bus_clone_3_clone'>
+        <pose>19.8651 10.6997 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>19.8651 10.6997 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='bus_clone_4'>
+        <pose>27.358 12.6173 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>27.358 12.6173 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='ground_plane'>
+        <pose>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='robocross'>
+        <pose>-0.055682 0.054344 0.010248 -0.007156 1e-06 0.034599</pose>
+        <scale>1 1 1</scale>
+        <link name='base_link'>
+          <pose>-0.055682 0.054344 0.010248 -0.007156 1e-06 0.034599</pose>
+          <velocity>-0.003903 0.000177 -0.003613 -0.000641 0.005273 0.000203</velocity>
+          <acceleration>-3.8099 0.194501 -0.231139 0.195015 0.45421 0.111416</acceleration>
+          <wrench>-3.8099 0.194501 -0.231139 0 -0 0</wrench>
+        </link>
+        <link name='bl_1'>
+          <pose>-0.895175 -0.986607 0.342501 0.044208 -3e-06 0.034599</pose>
+          <velocity>-0.001432 0.00018 0.002576 -0.000518 -0.004179 0.000123</velocity>
+          <acceleration>-0.811504 0.023613 7.91494 -2.7711 -0.440698 3.0179</acceleration>
+          <wrench>-19.8819 0.578512 193.916 0 -0 0</wrench>
+        </link>
+        <link name='br_1'>
+          <pose>0.853775 -0.92607 0.342495 -0.0951 3e-06 0.034599</pose>
+          <velocity>-0.001315 0.000595 -0.009032 -0.000582 0.004553 0.000261</velocity>
+          <acceleration>-0.152287 0.311026 -8.5221 -3.00238 1.33249 -2.98457</acceleration>
+          <wrench>-3.73102 7.62014 -208.792 0 -0 0</wrench>
+        </link>
+        <link name='chassis_link'>
+          <pose>-0.055683 0.054344 0.010249 -0.007156 1e-06 0.034599</pose>
+          <velocity>-0.003803 0.000159 -0.003657 -0.000654 0.005214 0.00021</velocity>
+          <acceleration>0.639364 0.077946 -0.186171 0.022476 0.341904 0.080992</acceleration>
+          <wrench>1010.19 123.154 -294.151 0 -0 0</wrench>
+        </link>
+        <link name='fl_1'>
+          <pose>-0.982724 1.54295 0.324553 0.000193 -2e-06 0.032129</pose>
+          <velocity>-0.004397 -0.001952 -0.04698 0.00824 0.001402 0.00034</velocity>
+          <acceleration>-4.37126 2.75908 -57.4832 2.81845 1.30497 -1.88724</acceleration>
+          <wrench>-107.096 67.5973 -1408.34 0 -0 0</wrench>
+        </link>
+        <link name='fr_1'>
+          <pose>0.76623 1.60334 0.324617 -0.00126 -1e-05 0.034641</pose>
+          <velocity>-0.001661 0.00474 0.01099 -0.01469 -0.005134 -0.000376</velocity>
+          <acceleration>-0.379389 2.06829 63.9762 -1.16864 1.50673 -0.746246</acceleration>
+          <wrench>-9.29504 50.6731 1567.42 0 -0 0</wrench>
+        </link>
+        <link name='hokuyo_link'>
+          <pose>-0.055682 0.054344 0.010248 -0.007156 1e-06 0.034599</pose>
+          <velocity>-0.003868 0.000171 -0.003629 -0.000652 0.005222 0.000209</velocity>
+          <acceleration>-3.76698 0.199479 -0.227031 0.199717 0.394448 0.116736</acceleration>
+          <wrench>-3.76698 0.199479 -0.227031 0 -0 0</wrench>
+        </link>
+        <link name='l_steer_1'>
+          <pose>-0.932749 1.54455 0.324612 -0.007156 5e-06 0.032129</pose>
+          <velocity>-0.004791 -0.002116 -0.063536 -0.000525 -0.000682 0.000248</velocity>
+          <acceleration>-4.69587 2.72736 -80.119 -2.57373 -1.50448 -1.84644</acceleration>
+          <wrench>-4.69587 2.72736 -80.119 0 -0 0</wrench>
+        </link>
+        <link name='r_steer_1'>
+          <pose>0.716261 1.6016 0.324697 -0.007156 -2e-06 0.034642</pose>
+          <velocity>-0.001224 0.005899 0.018422 -0.000272 -0.00025 -0.001128</velocity>
+          <acceleration>0.252838 2.63004 88.6935 0.530307 0.944882 -1.22586</acceleration>
+          <wrench>0.252838 2.63004 88.6935 0 -0 0</wrench>
+        </link>
+        <link name='steering_wheel'>
+          <pose>-0.055682 0.054338 0.010248 0.00366 -1.2e-05 0.03162</pose>
+          <velocity>-0.003862 0.000169 -0.003632 -0.000155 0.005313 6.8e-05</velocity>
+          <acceleration>-3.75971 0.200542 -0.226512 -0.159194 0.473177 0.205702</acceleration>
+          <wrench>-3.75971 0.200542 -0.226512 0 -0 0</wrench>
+        </link>
+        <link name='velodyne_link'>
+          <pose>-0.055683 0.054344 0.010249 -0.007156 1e-06 0.034599</pose>
+          <velocity>-0.003792 0.000158 -0.003662 -0.000671 0.005138 0.000219</velocity>
+          <acceleration>-3.67386 0.210298 -0.218236 0.207553 0.295796 0.192059</acceleration>
+          <wrench>-3.7106 0.212401 -0.220418 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name='sun'>
+        <pose>0 0 10 0 -0 0</pose>
+      </light>
+    </state>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>9.42264 -42.2878 73.9221 0 1.10364 1.56819</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+    <model name='bus'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-10.0774 0.821677 0 0 -0 0</pose>
+    </model>
+    <model name='bus_clone'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-10.0177 13.2978 0 0 -0 0</pose>
+    </model>
+    <model name='bus_clone_0'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-8.7231 -12.8588 0 0 -0 0</pose>
+    </model>
+    <model name='bus_clone_1'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>11.2839 -25.3621 0 0 -0 0</pose>
+    </model>
+    <model name='bus_clone_1_clone'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>6.93133 -10.8786 0 0 -0 1.55226</pose>
+    </model>
+    <model name='bus_clone_1_clone_0'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>10.9298 -17.4711 0 0 -0 1.55226</pose>
+    </model>
+    <model name='bus_clone_1_clone_1'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>22.7815 -17.7074 0 0 -0 1.55226</pose>
+    </model>
+    <model name='bus_clone_2'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>27.2296 -10.9295 0 0 -0 0</pose>
+    </model>
+    <model name='bus_clone_3'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>27.3753 1.19888 0 0 -0 0</pose>
+    </model>
+    <model name='bus_clone_4'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>27.358 12.6173 0 0 -0 0</pose>
+    </model>
+    <model name='bus_clone_1_clone_1_clone'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-5.82419 20.0722 0 0 -0 1.55226</pose>
+    </model>
+    <model name='bus_clone_1_clone_1_clone_0'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>5.70532 17.7185 0 0 -0 1.55226</pose>
+    </model>
+    <model name='bus_clone_1_clone_1_clone_1'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>17.0254 19.0914 0 0 -0 1.55226</pose>
+    </model>
+    <model name='bus_clone_1_clone_1_clone_2'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>25.6738 21.1377 0 0 -0 1.55226</pose>
+    </model>
+    <model name='bus_clone_3_clone'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>model://bus/meshes/bus.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>19.8651 10.6997 0 0 -0 0</pose>
+    </model>
+  </world>
+</sdf>

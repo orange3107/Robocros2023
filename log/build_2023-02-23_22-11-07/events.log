@@ -1,0 +1,139 @@
+[0.000000] (-) TimerEvent: {}
+[0.000317] (my_box_bot_gazebo) JobQueued: {'identifier': 'my_box_bot_gazebo', 'dependencies': OrderedDict()}
+[0.000463] (my_box_bot_gazebo) JobStarted: {'identifier': 'my_box_bot_gazebo'}
+[0.010177] (my_box_bot_gazebo) JobProgress: {'identifier': 'my_box_bot_gazebo', 'progress': 'cmake'}
+[0.011314] (my_box_bot_gazebo) JobProgress: {'identifier': 'my_box_bot_gazebo', 'progress': 'build'}
+[0.011494] (my_box_bot_gazebo) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/ilya22/ros2_humble/src/my_box_bot_gazebo/build/my_box_bot_gazebo', '--', '-j16', '-l16'], 'cwd': '/home/ilya22/ros2_humble/src/my_box_bot_gazebo/build/my_box_bot_gazebo', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'ilya22'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/ilya22/ros2_humble/install/slam_toolbox/lib:/home/ilya22/ros2_humble/install/autocar_msgs/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/ilya22'), ('OLDPWD', '/home/ilya22/ros2_humble/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('SYSTEMD_EXEC_PID', '1727'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/ilya22/ros2_humble/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'ilya22'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'ilya22'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/ilya22-ROG-Zephyrus-G15-GA502IU-GA502IU:@/tmp/.ICE-unix/1351,unix/ilya22-ROG-Zephyrus-G15-GA502IU-GA502IU:/tmp/.ICE-unix/1351'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/ca3896bf_9c25_4c83_ac23_1b225277993f'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.8RJT01'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.104'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/ilya22/ros2_humble/install/slam_toolbox:/home/ilya22/ros2_humble/install/robosross:/home/ilya22/ros2_humble/install/robocross:/home/ilya22/ros2_humble/install/my_robot1:/home/ilya22/ros2_humble/install/launches:/home/ilya22/ros2_humble/install/gazebo_noiser:/home/ilya22/ros2_humble/install/autocar_nav:/home/ilya22/ros2_humble/install/autocar_msgs:/home/ilya22/ros2_humble/install/autocar_map:/home/ilya22/ros2_humble/install/autocar_gazebo:/home/ilya22/ros2_humble/install/autocar_description:/home/ilya22/ros2_humble/install/ar_ht_gazebo:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/ilya22/ros2_humble/src/my_box_bot_gazebo/build/my_box_bot_gazebo'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/ilya22/ros2_humble/install/slam_toolbox/local/lib/python3.10/dist-packages:/home/ilya22/ros2_humble/install/robocross/lib/python3.10/site-packages:/home/ilya22/ros2_humble/install/gazebo_noiser/lib/python3.10/site-packages:/home/ilya22/ros2_humble/install/autocar_nav/local/lib/python3.10/dist-packages:/home/ilya22/ros2_humble/install/autocar_msgs/local/lib/python3.10/dist-packages:/home/ilya22/ros2_humble/install/ar_ht_gazebo/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/ilya22/ros2_humble/install/slam_toolbox:/home/ilya22/ros2_humble/install/robosross:/home/ilya22/ros2_humble/install/my_robot1:/home/ilya22/ros2_humble/install/launches:/home/ilya22/ros2_humble/install/autocar_nav:/home/ilya22/ros2_humble/install/autocar_msgs:/home/ilya22/ros2_humble/install/autocar_map:/home/ilya22/ros2_humble/install/autocar_gazebo:/home/ilya22/ros2_humble/install/autocar_description:/home/ilya22/ros2_humble/install/ar_ht_gazebo:/home/ilya22/ros2_humble/install/robocross:/home/ilya22/ros2_humble/install/gazebo_noiser:/opt/ros/humble')]), 'shell': False}
+[0.050445] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.3 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.098416] (-) TimerEvent: {}
+[0.198798] (-) TimerEvent: {}
+[0.223455] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found rclpy: 3.3.5 (/opt/ros/humble/share/rclpy/cmake)\n'}
+[0.230579] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found gazebo_ros: 3.7.0 (/opt/ros/humble/share/gazebo_ros/cmake)\n'}
+[0.298962] (-) TimerEvent: {}
+[0.303138] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.4 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[0.309548] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.4 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[0.319872] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.4 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[0.335914] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.357355] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.399127] (-) TimerEvent: {}
+[0.426394] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.1 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[0.430062] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.2 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[0.499261] (-) TimerEvent: {}
+[0.545147] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  \n'}
+[0.571081] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/humble/include  \n'}
+[0.599425] (-) TimerEvent: {}
+[0.615473] (my_box_bot_gazebo) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[0.627304] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[0.699535] (-) TimerEvent: {}
+[0.700620] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[0.701224] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[0.799636] (-) TimerEvent: {}
+[0.805912] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[0.807823] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[0.899762] (-) TimerEvent: {}
+[0.980822] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found PkgConfig: /usr/bin/pkg-config (found version "0.29.2") \n'}
+[0.982958] (my_box_bot_gazebo) StdoutLine: {'line': b"-- Checking for module 'bullet>=2.82'\n"}
+[0.999902] (-) TimerEvent: {}
+[1.001432] (my_box_bot_gazebo) StdoutLine: {'line': b'--   Found bullet, version 3.05\n'}
+[1.099998] (-) TimerEvent: {}
+[1.129138] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found fcl: /usr/include (found suitable version "0.7.0", minimum required is "0.5.0") \n'}
+[1.187634] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found assimp: /usr/include (found version "5.2.0") \n'}
+[1.200118] (-) TimerEvent: {}
+[1.219117] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found DART: /usr/include (Required is at least version "6.6") found components: dart \n'}
+[1.262549] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found suitable version "1.74.0", minimum required is "1.40.0") found components: thread system filesystem program_options regex iostreams date_time \n'}
+[1.283326] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found version "3.12.4") \n'}
+[1.290539] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for ignition-math6 -- found version 6.12.0\n'}
+[1.299085] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of ignition-math6\n'}
+[1.300228] (-) TimerEvent: {}
+[1.300550] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for OGRE...\n'}
+[1.300847] (my_box_bot_gazebo) StdoutLine: {'line': b'-- OGRE_PREFIX_WATCH changed.\n'}
+[1.308681] (my_box_bot_gazebo) StdoutLine: {'line': b"-- Checking for module 'OGRE'\n"}
+[1.327263] (my_box_bot_gazebo) StdoutLine: {'line': b'--   Found OGRE, version 1.9.0\n'}
+[1.376777] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found Ogre Ghadamon (1.9.0)\n'}
+[1.392158] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found OGRE: optimized;/usr/lib/x86_64-linux-gnu/libOgreMain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreMain.so\n'}
+[1.400383] (-) TimerEvent: {}
+[1.412659] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for OGRE_Paging...\n'}
+[1.419880] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found OGRE_Paging: optimized;/usr/lib/x86_64-linux-gnu/libOgrePaging.so;debug;/usr/lib/x86_64-linux-gnu/libOgrePaging.so\n'}
+[1.420032] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for OGRE_Terrain...\n'}
+[1.425166] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found OGRE_Terrain: optimized;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so\n'}
+[1.425388] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for OGRE_Property...\n'}
+[1.430163] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found OGRE_Property: optimized;/usr/lib/x86_64-linux-gnu/libOgreProperty.so;debug;/usr/lib/x86_64-linux-gnu/libOgreProperty.so\n'}
+[1.430308] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for OGRE_RTShaderSystem...\n'}
+[1.435264] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found OGRE_RTShaderSystem: optimized;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so;debug;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so\n'}
+[1.435448] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for OGRE_Volume...\n'}
+[1.440397] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found OGRE_Volume: optimized;/usr/lib/x86_64-linux-gnu/libOgreVolume.so;debug;/usr/lib/x86_64-linux-gnu/libOgreVolume.so\n'}
+[1.440593] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for OGRE_Overlay...\n'}
+[1.445405] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found OGRE_Overlay: optimized;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so;debug;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so\n'}
+[1.500518] (-) TimerEvent: {}
+[1.555424] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for ignition-math6 -- found version 6.12.0\n'}
+[1.559210] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for ignition-transport8 -- found version 8.2.1\n'}
+[1.559464] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of ignition-transport8\n'}
+[1.579198] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found suitable version "3.12.4", minimum required is "3") \n'}
+[1.589147] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Config-file not installed for ZeroMQ -- checking for pkg-config\n'}
+[1.594975] (my_box_bot_gazebo) StdoutLine: {'line': b"-- Checking for module 'libzmq >= 4'\n"}
+[1.600654] (-) TimerEvent: {}
+[1.611849] (my_box_bot_gazebo) StdoutLine: {'line': b'--   Found libzmq , version 4.3.4\n'}
+[1.659045] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found ZeroMQ: TRUE (Required is at least version "4") \n'}
+[1.670505] (my_box_bot_gazebo) StdoutLine: {'line': b"-- Checking for module 'uuid'\n"}
+[1.686573] (my_box_bot_gazebo) StdoutLine: {'line': b'--   Found uuid, version 2.37.2\n'}
+[1.700803] (-) TimerEvent: {}
+[1.730577] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found UUID: TRUE  \n'}
+[1.736419] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for ignition-msgs5 -- found version 5.8.1\n'}
+[1.737351] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of ignition-msgs5\n'}
+[1.774556] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for ignition-math6 -- found version 6.12.0\n'}
+[1.780400] (my_box_bot_gazebo) StdoutLine: {'line': b"-- Checking for module 'tinyxml2'\n"}
+[1.792896] (my_box_bot_gazebo) StdoutLine: {'line': b'--   Found tinyxml2, version 9.0.0\n'}
+[1.800907] (-) TimerEvent: {}
+[1.835968] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for ignition-msgs5 -- found version 5.8.1\n'}
+[1.841946] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for ignition-common3 -- found version 3.14.0\n'}
+[1.842428] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of ignition-common3\n'}
+[1.843221] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for dlfcn.h - found\n'}
+[1.844911] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for libdl - found\n'}
+[1.847201] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found DL: TRUE  \n'}
+[1.860692] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found tinyobjloader: /usr/lib/x86_64-linux-gnu/cmake/tinyobjloader/tinyobjloader-config.cmake (found version "2.0.0") \n'}
+[1.861049] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Searching for <ignition-common3> component [graphics]\n'}
+[1.863501] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for ignition-common3-graphics -- found version 3.14.0\n'}
+[1.863818] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of ignition-common3-graphics\n'}
+[1.864076] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for ignition-math6 -- found version 6.12.0\n'}
+[1.867366] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for ignition-fuel_tools4 -- found version 4.4.0\n'}
+[1.867755] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of ignition-fuel_tools4\n'}
+[1.901045] (-) TimerEvent: {}
+[1.956829] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found CURL: /usr/lib/x86_64-linux-gnu/libcurl.so (found version "7.81.0")  \n'}
+[1.971431] (my_box_bot_gazebo) StdoutLine: {'line': b"-- Checking for module 'jsoncpp'\n"}
+[1.988301] (my_box_bot_gazebo) StdoutLine: {'line': b'--   Found jsoncpp, version 1.9.5\n'}
+[2.001197] (-) TimerEvent: {}
+[2.018974] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found JSONCPP: TRUE  \n'}
+[2.024919] (my_box_bot_gazebo) StdoutLine: {'line': b"-- Checking for module 'libzip'\n"}
+[2.041220] (my_box_bot_gazebo) StdoutLine: {'line': b'--   Found libzip, version 1.7.3\n'}
+[2.080560] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Found ZIP: TRUE  \n'}
+[2.081239] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for ignition-common3 -- found version 3.14.0\n'}
+[2.081828] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for ignition-math6 -- found version 6.12.0\n'}
+[2.082450] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Looking for ignition-msgs5 -- found version 5.8.1\n'}
+[2.090308] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Gazebo version: 11.10\n'}
+[2.091055] (my_box_bot_gazebo) StdoutLine: {'line': b"-- Checking for module 'tbb'\n"}
+[2.101299] (-) TimerEvent: {}
+[2.108290] (my_box_bot_gazebo) StdoutLine: {'line': b'--   Found tbb, version 2021.5.0\n'}
+[2.159743] (my_box_bot_gazebo) StderrLine: {'line': b'\x1b[31mCMake Error at CMakeLists.txt:12 (find_package):\n'}
+[2.160143] (my_box_bot_gazebo) StderrLine: {'line': b'  By not providing "Findmy_box_bot_description.cmake" in CMAKE_MODULE_PATH\n'}
+[2.160297] (my_box_bot_gazebo) StderrLine: {'line': b'  this project has asked CMake to find a package configuration file provided\n'}
+[2.160436] (my_box_bot_gazebo) StderrLine: {'line': b'  by "my_box_bot_description", but CMake did not find one.\n'}
+[2.160576] (my_box_bot_gazebo) StderrLine: {'line': b'\n'}
+[2.160716] (my_box_bot_gazebo) StderrLine: {'line': b'  Could not find a package configuration file provided by\n'}
+[2.160896] (my_box_bot_gazebo) StderrLine: {'line': b'  "my_box_bot_description" with any of the following names:\n'}
+[2.161025] (my_box_bot_gazebo) StderrLine: {'line': b'\n'}
+[2.161120] (my_box_bot_gazebo) StderrLine: {'line': b'    my_box_bot_descriptionConfig.cmake\n'}
+[2.161216] (my_box_bot_gazebo) StderrLine: {'line': b'    my_box_bot_description-config.cmake\n'}
+[2.161312] (my_box_bot_gazebo) StderrLine: {'line': b'\n'}
+[2.161408] (my_box_bot_gazebo) StderrLine: {'line': b'  Add the installation prefix of "my_box_bot_description" to\n'}
+[2.161502] (my_box_bot_gazebo) StderrLine: {'line': b'  CMAKE_PREFIX_PATH or set "my_box_bot_description_DIR" to a directory\n'}
+[2.161602] (my_box_bot_gazebo) StderrLine: {'line': b'  containing one of the above files.  If "my_box_bot_description" provides a\n'}
+[2.161696] (my_box_bot_gazebo) StderrLine: {'line': b'  separate development package or SDK, be sure it has been installed.\n'}
+[2.161796] (my_box_bot_gazebo) StderrLine: {'line': b'\n'}
+[2.161890] (my_box_bot_gazebo) StderrLine: {'line': b'\x1b[0m\n'}
+[2.161985] (my_box_bot_gazebo) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[2.162089] (my_box_bot_gazebo) StdoutLine: {'line': b'See also "/home/ilya22/ros2_humble/src/my_box_bot_gazebo/build/my_box_bot_gazebo/CMakeFiles/CMakeOutput.log".\n'}
+[2.167713] (my_box_bot_gazebo) StderrLine: {'line': b'gmake: *** [Makefile:226: cmake_check_build_system] Error 1\n'}
+[2.170119] (my_box_bot_gazebo) CommandEnded: {'returncode': 2}
+[2.201576] (-) TimerEvent: {}
+[2.226321] (my_box_bot_gazebo) JobEnded: {'identifier': 'my_box_bot_gazebo', 'rc': 2}
+[2.236952] (-) EventReactorShutdown: {}

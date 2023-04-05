@@ -1,0 +1,306 @@
+[0.021s] Invoking command in '/home/ilya22/ros2_humble/src/my_box_bot_gazebo/build/my_box_bot_gazebo': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/ilya22/ros2_humble/src/my_box_bot_gazebo/build/my_box_bot_gazebo -- -j16 -l16
+[0.064s] -- Found ament_cmake: 1.3.3 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.305s] -- Found rclpy: 3.3.5 (/opt/ros/humble/share/rclpy/cmake)
+[0.305s] -- Found gazebo_ros: 3.7.0 (/opt/ros/humble/share/gazebo_ros/cmake)
+[0.369s] -- Found rosidl_generator_c: 3.1.4 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.372s] -- Found rosidl_adapter: 3.1.4 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.380s] -- Found rosidl_generator_cpp: 3.1.4 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.394s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.415s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.496s] -- Found rmw_implementation_cmake: 6.1.1 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.497s] -- Found rmw_fastrtps_cpp: 6.2.2 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.671s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.938s] -- Found DART: /usr/include (Required is at least version "6.6") found components: dart 
+[0.978s] -- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found version "3.12.4") 
+[0.981s] -- Looking for ignition-math6 -- found version 6.12.0
+[0.986s] -- Searching for dependencies of ignition-math6
+[0.988s] -- Looking for OGRE...
+[0.997s] -- Found Ogre Ghadamon (1.9.0)
+[0.998s] -- Found OGRE: optimized;/usr/lib/x86_64-linux-gnu/libOgreMain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreMain.so
+[1.011s] -- Looking for OGRE_Paging...
+[1.011s] -- Found OGRE_Paging: optimized;/usr/lib/x86_64-linux-gnu/libOgrePaging.so;debug;/usr/lib/x86_64-linux-gnu/libOgrePaging.so
+[1.011s] -- Looking for OGRE_Terrain...
+[1.011s] -- Found OGRE_Terrain: optimized;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so
+[1.011s] -- Looking for OGRE_Property...
+[1.012s] -- Found OGRE_Property: optimized;/usr/lib/x86_64-linux-gnu/libOgreProperty.so;debug;/usr/lib/x86_64-linux-gnu/libOgreProperty.so
+[1.012s] -- Looking for OGRE_RTShaderSystem...
+[1.012s] -- Found OGRE_RTShaderSystem: optimized;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so;debug;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so
+[1.012s] -- Looking for OGRE_Volume...
+[1.012s] -- Found OGRE_Volume: optimized;/usr/lib/x86_64-linux-gnu/libOgreVolume.so;debug;/usr/lib/x86_64-linux-gnu/libOgreVolume.so
+[1.012s] -- Looking for OGRE_Overlay...
+[1.012s] -- Found OGRE_Overlay: optimized;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so;debug;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so
+[1.151s] -- Looking for ignition-math6 -- found version 6.12.0
+[1.151s] -- Looking for ignition-transport8 -- found version 8.2.1
+[1.152s] -- Searching for dependencies of ignition-transport8
+[1.179s] -- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found suitable version "3.12.4", minimum required is "3") 
+[1.195s] -- Config-file not installed for ZeroMQ -- checking for pkg-config
+[1.203s] -- Checking for module 'libzmq >= 4'
+[1.228s] --   Found libzmq , version 4.3.4
+[1.306s] -- Checking for module 'uuid'
+[1.327s] --   Found uuid, version 2.37.2
+[1.387s] -- Looking for ignition-msgs5 -- found version 5.8.1
+[1.388s] -- Searching for dependencies of ignition-msgs5
+[1.432s] -- Looking for ignition-math6 -- found version 6.12.0
+[1.441s] -- Checking for module 'tinyxml2'
+[1.464s] --   Found tinyxml2, version 9.0.0
+[1.523s] -- Looking for ignition-msgs5 -- found version 5.8.1
+[1.524s] -- Looking for ignition-common3 -- found version 3.14.0
+[1.524s] -- Searching for dependencies of ignition-common3
+[1.525s] -- Looking for dlfcn.h - found
+[1.525s] -- Looking for libdl - found
+[1.545s] -- Searching for <ignition-common3> component [graphics]
+[1.546s] -- Looking for ignition-common3-graphics -- found version 3.14.0
+[1.547s] -- Searching for dependencies of ignition-common3-graphics
+[1.548s] -- Looking for ignition-math6 -- found version 6.12.0
+[1.550s] -- Looking for ignition-fuel_tools4 -- found version 4.4.0
+[1.551s] -- Searching for dependencies of ignition-fuel_tools4
+[1.617s] -- Checking for module 'jsoncpp'
+[1.640s] --   Found jsoncpp, version 1.9.5
+[1.708s] -- Checking for module 'libzip'
+[1.729s] --   Found libzip, version 1.7.3
+[1.788s] -- Looking for ignition-common3 -- found version 3.14.0
+[1.789s] -- Looking for ignition-math6 -- found version 6.12.0
+[1.789s] -- Looking for ignition-msgs5 -- found version 5.8.1
+[1.791s] -- Gazebo version: 11.10
+[1.803s] -- Found ament_lint_auto: 0.12.4 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[1.894s] -- Added test 'copyright' to check source files copyright and LICENSE
+[2.045s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[2.045s] -- Configured cppcheck include dirs: 
+[2.045s] -- Configured cppcheck exclude dirs and/or files: 
+[2.196s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[2.196s] -- Configured cpplint exclude dirs and/or files: 
+[2.215s] -- Added test 'flake8' to check Python code syntax and style conventions
+[2.252s] -- Added test 'lint_cmake' to check CMake code style
+[2.271s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[2.421s] -- Added test 'uncrustify' to check C / C++ code style
+[2.421s] -- Configured uncrustify additional arguments: 
+[2.440s] -- Added test 'xmllint' to check XML markup files
+[2.442s] -- Configuring done
+[2.450s] -- Generating done
+[2.453s] -- Build files have been written to: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/build/my_box_bot_gazebo
+[2.493s] Invoked command in '/home/ilya22/ros2_humble/src/my_box_bot_gazebo/build/my_box_bot_gazebo' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/ilya22/ros2_humble/src/my_box_bot_gazebo/build/my_box_bot_gazebo -- -j16 -l16
+[2.539s] Invoking command in '/home/ilya22/ros2_humble/src/my_box_bot_gazebo/build/my_box_bot_gazebo': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/ilya22/ros2_humble/src/my_box_bot_gazebo/build/my_box_bot_gazebo
+[2.550s] -- Install configuration: ""
+[2.550s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/lib/my_box_bot_gazebo/teleop.py
+[2.550s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/lib/my_box_bot_gazebo/spawn_robot.py
+[2.550s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//launch
+[2.551s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//launch/spawn_lidar.xml
+[2.551s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//launch/start_world.launch.py
+[2.552s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//launch/spawn_robot_ros2.launch.xml
+[2.553s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//launch/spawn_robot_description.launch.py
+[2.553s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//launch/publish_urdf.launch.py
+[2.553s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//launch/start_gazebo_simulation.launch.py
+[2.553s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//launch/robot_description_publisher.py
+[2.554s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//worlds
+[2.554s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//worlds/autocar_city.world
+[2.555s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//worlds/base.world
+[2.555s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//worlds/world_robocross.world
+[2.557s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//worlds/box_bot_empty.world
+[2.558s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models
+[2.558s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/urdf_autocar
+[2.558s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/urdf_autocar/urdf
+[2.558s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/urdf_autocar/urdf/autocar.xacro
+[2.558s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/urdf_autocar/meshes
+[2.558s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/urdf_autocar/meshes/chassis_link.stl
+[2.558s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/urdf_autocar/meshes/br_1.stl
+[2.558s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/urdf_autocar/meshes/hokuyo.dae
+[2.558s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/urdf_autocar/meshes/fr_1.stl
+[2.558s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/urdf_autocar/meshes/bl_1.stl
+[2.559s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/urdf_autocar/meshes/lds.dae
+[2.559s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/urdf_autocar/meshes/chassis_link2.stl
+[2.559s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/urdf_autocar/meshes/tire.dae
+[2.559s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/urdf_autocar/meshes/fl_1.stl
+[2.559s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/box_room
+[2.559s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/box_room/model.sdf
+[2.559s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/box_room/model.config
+[2.559s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/box_room/meshes
+[2.559s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/box_room/meshes/box_room.dae
+[2.559s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/box_room/meshes/chambre.png
+[2.560s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/prius
+[2.560s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/prius/package.xml
+[2.560s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/prius/urdf
+[2.560s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/prius/urdf/prius.sdf
+[2.560s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/prius/urdf/prius.urdf
+[2.560s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/prius/meshes
+[2.560s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/prius/meshes/Hybrid.png
+[2.560s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/prius/meshes/Hybrid_Interior.png
+[2.560s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/prius/meshes/wheel.mtl
+[2.560s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/prius/meshes/hybrid_body.obj
+[2.560s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/prius/meshes/Wheels3.png
+[2.560s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/prius/meshes/steering_wheel.obj
+[2.561s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/prius/meshes/hybrid_body.mtl
+[2.561s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/prius/meshes/steering_wheel.mtl
+[2.561s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/prius/meshes/wheel.obj
+[2.561s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne
+[2.561s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf
+[2.561s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/HDL-32E.xacro
+[2.561s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro.py
+[2.561s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/HDL-32E.urdf.xacro
+[2.561s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/HDL-32E.sdf
+[2.561s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf
+[2.561s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/__pycache__
+[2.561s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/__pycache__/xacro.cpython-310.pyc
+[2.562s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/test_xacro.py
+[2.562s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support
+[2.562s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/package.xml
+[2.562s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/CMakeLists.txt
+[2.562s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/tests
+[2.563s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/tests/roslaunch_test_irb4600_60_205.xml
+[2.563s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/urdf
+[2.563s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/urdf/irb4600_60_205.xacro
+[2.563s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/urdf/base_test1.urdf
+[2.563s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/urdf/dh2urdf.urdf
+[2.564s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/urdf/test_abb_4600_voxel.urdf
+[2.564s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/urdf/base_test.urdf
+[2.564s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/urdf/test_abb_4600.urdf
+[2.565s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/urdf/base.urdf
+[2.565s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/urdf/test_abb_4600_voxel1.urdf
+[2.565s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/urdf/irb4600_60_205_macro.xacro
+[2.565s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/config
+[2.565s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/config/joint_names_irb4600_60_205.yaml
+[2.566s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/xacro.py
+[2.566s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/test_abb_4600.urdf
+[2.566s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/launch
+[2.566s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/launch/robot_state_visualize_irb4600_60_205.launch
+[2.567s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/launch/robot_interface_download_irb4600_60_205.launch
+[2.567s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/launch/test_irb4600_60_205.launch
+[2.567s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/launch/load_irb4600_60_205.launch
+[2.567s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes
+[2.568s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/irb4600_60_205
+[2.568s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/irb4600_60_205/collision
+[2.568s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/irb4600_60_205/collision/link_6.stl
+[2.568s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/irb4600_60_205/collision/link_3.stl
+[2.569s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/irb4600_60_205/collision/link_2.stl
+[2.570s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/irb4600_60_205/collision/base_link.stl
+[2.570s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/irb4600_60_205/collision/link_4.stl
+[2.571s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/irb4600_60_205/collision/link_1.stl
+[2.572s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/irb4600_60_205/collision/link_5.stl
+[2.573s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/irb4600_60_205/visual
+[2.573s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/irb4600_60_205/visual/link_6.stl
+[2.575s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/irb4600_60_205/visual/link_3.stl
+[2.582s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/irb4600_60_205/visual/link_2.stl
+[2.586s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/irb4600_60_205/visual/base_link.stl
+[2.589s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/irb4600_60_205/visual/link_4.stl
+[2.596s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/irb4600_60_205/visual/link_1.stl
+[2.602s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/irb4600_60_205/visual/link_5.stl
+[2.605s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base
+[2.605s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/collision
+[2.605s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/collision/base.dae
+[2.606s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/collision/wheel_l2.stl
+[2.609s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/collision/base.stl
+[2.609s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/collision/wheel_r2.dae
+[2.618s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/collision/base_2180009.png
+[2.618s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/collision/wheel_r1.dae
+[2.626s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/collision/wheel_r2.stl
+[2.629s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/collision/wheel_l1.stl
+[2.632s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/collision/wheel_r1.stl
+[2.635s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/collision/wheel_l1.dae
+[2.643s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/collision/wheel_l2.dae
+[2.652s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/collision/whee_2180009.png
+[2.653s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/visual
+[2.653s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/visual/base.dae
+[2.654s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/visual/wheel_l2.stl
+[2.657s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/visual/base.stl
+[2.657s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/visual/wheel_r2.dae
+[2.664s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/visual/base_2180009.png
+[2.665s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/visual/wheel_r1.dae
+[2.673s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/visual/wheel_r2.stl
+[2.676s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/visual/wheel_l1.stl
+[2.678s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/visual/wheel_r1.stl
+[2.681s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/visual/wheel_l1.dae
+[2.690s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/abb_irb4600_support/meshes/base/visual/wheel_l2.dae
+[2.697s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/xacro.py
+[2.698s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/README.md
+[2.698s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git
+[2.698s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/HEAD
+[2.699s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/index
+[2.699s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/config
+[2.699s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/hooks
+[2.699s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/hooks/pre-applypatch.sample
+[2.699s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/hooks/commit-msg.sample
+[2.699s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/hooks/update.sample
+[2.700s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/hooks/pre-commit.sample
+[2.700s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/hooks/pre-merge-commit.sample
+[2.700s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/hooks/fsmonitor-watchman.sample
+[2.700s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/hooks/prepare-commit-msg.sample
+[2.700s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/hooks/pre-rebase.sample
+[2.701s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/hooks/post-update.sample
+[2.701s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/hooks/push-to-checkout.sample
+[2.701s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/hooks/pre-receive.sample
+[2.702s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/hooks/pre-push.sample
+[2.702s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/hooks/applypatch-msg.sample
+[2.702s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/refs
+[2.703s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/refs/tags
+[2.703s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/refs/remotes
+[2.703s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/refs/remotes/origin
+[2.703s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/refs/remotes/origin/HEAD
+[2.703s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/refs/heads
+[2.703s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/refs/heads/master
+[2.704s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/logs
+[2.704s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/logs/HEAD
+[2.704s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/logs/refs
+[2.704s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/logs/refs/remotes
+[2.704s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/logs/refs/remotes/origin
+[2.705s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/logs/refs/remotes/origin/HEAD
+[2.705s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/logs/refs/heads
+[2.705s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/logs/refs/heads/master
+[2.705s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/branches
+[2.705s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/info
+[2.705s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/info/exclude
+[2.706s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/description
+[2.706s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/objects
+[2.706s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/objects/info
+[2.706s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/objects/pack
+[2.706s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/objects/pack/pack-7e847be3dd3ab6740b613cfa591b8c41b14ac3db.idx
+[2.706s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/objects/pack/pack-7e847be3dd3ab6740b613cfa591b8c41b14ac3db.pack
+[2.720s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.git/packed-refs
+[2.720s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/xacro2urdf/.gitignore
+[2.721s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/HDL-32E.urdf
+[2.721s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/velodyne/urdf/HDL-32E1.xacro
+[2.721s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar
+[2.721s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar/model.sdf
+[2.722s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar/autocarlidar.urdf.xacro
+[2.722s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar/model.config
+[2.722s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar/autocar.xacro
+[2.722s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar/meshes
+[2.723s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar/meshes/chassis_link.stl
+[2.723s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar/meshes/br_1.stl
+[2.723s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar/meshes/hokuyo.dae
+[2.723s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar/meshes/spoiler.stl
+[2.723s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar/meshes/fr_1.stl
+[2.723s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar/meshes/bl_1.stl
+[2.724s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar/meshes/lds.dae
+[2.724s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar/meshes/spoiler_1.stl
+[2.724s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar/meshes/tire.dae
+[2.724s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar/meshes/fl_1.stl
+[2.725s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar/meshes/chassis_link3.stl
+[2.725s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar/meshes/wheel.obj
+[2.725s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar2
+[2.725s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar2/urdf
+[2.725s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar2/urdf/ngeeann_av.gazebo
+[2.725s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar2/urdf/camera.xacro
+[2.726s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar2/urdf/ngeeann_av.urdf
+[2.726s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar2/urdf/materials.xacro
+[2.726s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar2/urdf/ngeeann_av.trans
+[2.726s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar2/urdf/hokuyo.xacro
+[2.726s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//models/autocar2/urdf/ngeeann_av.xacro
+[2.727s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//rviz
+[2.727s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//rviz/urdf.rviz
+[2.727s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//rviz/view.rviz
+[2.727s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo//rviz/demo.rviz
+[2.728s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/ament_index/resource_index/package_run_dependencies/my_box_bot_gazebo
+[2.728s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/ament_index/resource_index/parent_prefix_path/my_box_bot_gazebo
+[2.728s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo/environment/ament_prefix_path.sh
+[2.728s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo/environment/ament_prefix_path.dsv
+[2.728s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo/environment/path.sh
+[2.729s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo/environment/path.dsv
+[2.729s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo/local_setup.bash
+[2.729s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo/local_setup.sh
+[2.729s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo/local_setup.zsh
+[2.729s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo/local_setup.dsv
+[2.729s] -- Installing: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo/package.dsv
+[2.730s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/ament_index/resource_index/packages/my_box_bot_gazebo
+[2.730s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo/cmake/my_box_bot_gazeboConfig.cmake
+[2.730s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo/cmake/my_box_bot_gazeboConfig-version.cmake
+[2.730s] -- Up-to-date: /home/ilya22/ros2_humble/src/my_box_bot_gazebo/install/my_box_bot_gazebo/share/my_box_bot_gazebo/package.xml
+[2.732s] Invoked command in '/home/ilya22/ros2_humble/src/my_box_bot_gazebo/build/my_box_bot_gazebo' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/ilya22/ros2_humble/src/my_box_bot_gazebo/build/my_box_bot_gazebo

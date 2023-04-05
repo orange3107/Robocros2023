@@ -1,0 +1,8 @@
+<?xml version='1.0' ?>
+<launch>
+  <include file="$(find-pkg-share robocross2023)/launch/start_world.launch.py"/>
+  <!-- Publish URDF file in robot_description topic -->
+  <include file="$(find-pkg-share robocross2023)/launch/example.launch.py"/>
+  <!-- Read robot_description an dspawn in gazebo running sim -->
+  <include file="$(find-pkg-share robocross2023)/launch/spawn_robot_description.launch.py"/>
+</launch>

@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+
+<robot name="HDL-32E" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="$(find my_box_bot_gazebo)/models/velodyne/urdf/HDL-32E.urdf.xacro"/>
+  <xacro:HDL-32E parent="base_link" name="velodyne2" topic="/velodyne_points2" hz="10" samples="220">
+Z
+    </xacro:HDL-32E>
+</robot>
