@@ -27,7 +27,7 @@ class ImageSubscriber(Node):
     # Initiate the Node class's constructor and give it a name
     super().__init__('image_subscriber')
       
-    # Create the subscriber. This subscriber will receive an Image
+    # Create the subscriber. This subscriber will receive an Image1
     # from the video_frames topic. The queue size is 10 messages.
     self.subscription = self.create_subscription(
       Image, 
