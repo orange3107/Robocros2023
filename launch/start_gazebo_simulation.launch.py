@@ -35,14 +35,14 @@ def generate_launch_description():
     # os.environ["GAZEBO_MODEL_PATH"] = gazebo_models_path
     
     robot_name_in_model = 'robocross'
-    spawn_x_val = '14.0'
-    spawn_y_val = '10.0'
-    spawn_z_val = '0.2'
+    spawn_x_val = '8.25'
+    spawn_y_val = '-0.8'
+    spawn_z_val = '0'
     spawn_yaw_val = '1.57'
     
     descpkg = 'robocross2023'
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
-    rviz = os.path.join(get_package_share_directory(descpkg), 'rviz', 'view.rviz')
+    rviz = os.path.join(get_package_share_directory(descpkg), 'rviz', 'view2.rviz')
     urdf = os.path.join(get_package_share_directory(descpkg),'models/autocar', 'autocar.xacro')
     
     world = os.path.join(get_package_share_directory('robocross2023'),
@@ -50,6 +50,10 @@ def generate_launch_description():
     launch_file_dir = os.path.join(get_package_share_directory('robocross2023'), 'launch')
     pkg_gazebo_ros = get_package_share_directory('gazebo_ros')
     sdf = os.path.join(get_package_share_directory('robocross2023'), 'models/autocar/', 'model.sdf')
+    
+    map_file =os.path.join(get_package_share_directory('robocross2023'),
+                         'maps', 'my_map.yaml')
+                         
     return LaunchDescription([
         
         IncludeLaunchDescription(
@@ -66,15 +70,16 @@ def generate_launch_description():
         ),
         
         
+       
         
-        
-        Node(
+    Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
         name='robot_state_publisher_node',
         emulate_tty=True,
         parameters=[{'use_sim_time': True, 'robot_description': Command(['xacro ', sdf])}],
-        output="screen"
+        output="screen",
+
     ),
     
     Node(
@@ -106,5 +111,14 @@ def generate_launch_description():
             parameters=[{'use_sim_time': use_sim_time}],
             arguments=[sdf]
         ),
+        Node(
+    	    package='nav2_map_server',
+    	    executable='map_server',
+    	    name='map_server',
+    	    output='screen',
+    	    parameters=[{'use_sim_time': True}, 
+                        {'yaml_filename':map_file},
+                       ]),
+
         
     ])
