@@ -27,18 +27,20 @@ class Points:
         self.x = X
         self.y = Y
         self.children = np.empty((1,1))
-        self.parent = None
+        self.parent = 0
+        self.lenghtPath = 0
 
 
 class RrtStar:
-    def __init__(self, start, goal, iter, grid, gridArr, stepSize):
+    def __init__(self, start, goal, iter, grid, gridArr, stepSize, neighborhood):
         self.start = Points(start[0], start[1])
         self.goal = Points(goal[0], goal[1])
         self.mearestNode = None
         self.iterations = min(iter, 10000)
         self.grid = grid
-        self.gridArr = np.flip(gridArr,0)
+        self.gridArr = gridArr
         self.stp = stepSize
+        self.nhood = neighborhood
         self.path_distance = 0
         self.nearestDist = 10000
         self.numWaypoints = 0
@@ -61,33 +63,64 @@ class RrtStar:
           point = self.steerPoint(self.Waypoints[minPoint], node)
           #print(self.gridArr)
           
+          
           if(len(self.gridArr) > 2):
             if(np.any(self.grid[point[1]][point[0]]) == 0):
               point = Points(point[0], point[1])
               point.parent = minPoint
+              
+              ##point.lenghtPath = self.distance(point.x, point.y, self.Waypoints[point.parent].x, self.Waypoints[point.parent].y)
+              closelyPointArray = np.array([], 'int32')
+              min = 9999.0
+              for i in range(len(self.Waypoints)): # ищем самый малый по длине путь
+                 if(self.IsPointInCircle(self.Waypoints[i].x, self.Waypoints[i].y, point.x, point.y, self.nhood)):
+                    closelyPointArray = np.append(closelyPointArray, i)
+                    if self.Waypoints[i].lenghtPath < min:
+                      min = self.Waypoints[i].lenghtPath
+                      point.parent = i
+                #self.Waypoints = np.append(self.Waypoints, point)
+              point.lenghtPath = self.distance(point.x, point.y, self.Waypoints[point.parent].x, self.Waypoints[point.parent].y) + self.Waypoints[point.parent].lenghtPath
+              #print(point.lenghtPath) 
               self.Waypoints = np.append(self.Waypoints, point)
+
+              for i in range(len(closelyPointArray)):
+                 newLength = point.lenghtPath + self.distance(point.x, point.y, self.Waypoints[closelyPointArray[i]].x, self.Waypoints[closelyPointArray[i]].y)
+                 if self.Waypoints[closelyPointArray[i]].lenghtPath > newLength:
+                    self.Waypoints[closelyPointArray[i]].parent = len(self.Waypoints) - 1
+                    self.Waypoints[closelyPointArray[i]].lenghtPath = newLength
 
               if(self.IsPointInCircle(point.x, point.y, self.goal.x, self.goal.y, 10)):
                 self.count = len(self.Waypoints)-1
-                print(self.count)
-                break
+                #print(self.count)
+                #break
 
               #self.grid = cv2.line(self.grid, (point.x, point.y), (self.Waypoints[minPoint].x, self.Waypoints[minPoint].y), (50,50,50), 2) 
+            
         while(True):
-          print(self.count)
+          #print(self.count)
           if(self.count > 0):
             x = self.Waypoints[self.count].x
             y = self.Waypoints[self.count].y
-            self.grid = cv2.circle(self.grid, (x, y), 2, (50,50,50), -1)
+            x1 = self.Waypoints[self.Waypoints[self.count].parent].x
+            y1 = self.Waypoints[self.Waypoints[self.count].parent].y
+            self.grid = cv2.line(self.grid, (x, y), (x1, y1), (50,50,50), 2)
+            self.grid = cv2.circle(self.grid, (x, y), 2, (127,127,127), -1)
             self.count = self.Waypoints[self.count].parent
           else:
               #print("blea")
               break
+          
+        #self.grid = cv2.flip(self.grid, 0)
+        cv2.imshow("path", self.grid)
+        cv2.waitKey(1)
+             
                     
 
 
 
-
+    def distance(self, x1, y1, x2, y2):
+      c = math.sqrt((x2-x1)**2 + (y2-y1)**2)
+      return c
 
           
     
@@ -164,6 +197,8 @@ class CreateLocalRrt(Node):
     self.width = 0
     self.mapArr = np.empty((1,1))
 
+    self.timer = self.create_timer(1.5, self.timer_path_callback)
+
     self.subscription = self.create_subscription(
       Marker, 
       '/goalPoint', 
@@ -198,7 +233,17 @@ class CreateLocalRrt(Node):
     #print(self.current_map)
 
 
-
+  def timer_path_callback(self):
+      
+      width, height = self.current_map.shape[:2]
+      len = 20*math.sqrt((self.goalX - self.posX)**2 + (self.goalY - self.posY)**2)
+      posCarX = -int(20*self.carX)
+      posCarY = width+int(20*self.carY)
+      posGaolX = -int(len*math.sin(self.angleAutoPoint)) + posCarX
+      posGaolY = int(len*math.cos(self.angleAutoPoint)) + posCarY
+      imageMap = self.current_map
+      rrtStar = RrtStar((posCarX, posCarY), (posGaolX, posGaolY), 1000, imageMap,self.mapArr, 10, 35)
+      rrtStar.planning()
 
 
   def angle_auto_point_callback(self, data):
@@ -213,7 +258,7 @@ class CreateLocalRrt(Node):
      self.current_map = self.br.imgmsg_to_cv2(data)
      width, height = self.current_map.shape[:2]
      #self.current_map = cv2.rotate(self.current_map, cv2.ROTATE_180)
-     self.current_map = cv2.flip(self.current_map, 0)
+     #####self.current_map = cv2.flip(self.current_map, 0)
      posCarX = -int(20*self.carX)
      posCarY = width+int(20*self.carY)
      self.current_map = cv2.circle(self.current_map, (posCarX, posCarY), 5, (50,50,50), -1)
@@ -224,19 +269,21 @@ class CreateLocalRrt(Node):
      posGaolY = int(len)
      
      posGaolX = -int(len*math.sin(self.angleAutoPoint)) + posCarX
-     posGaolY = -int(len*math.cos(self.angleAutoPoint)) + posCarY
+     posGaolY = int(len*math.cos(self.angleAutoPoint)) + posCarY
      
      self.current_map = cv2.circle(self.current_map, (posGaolX, posGaolY), 5, (127,127,127), -1)
 
-     rrtStar = RrtStar((posCarX, posCarY), (posGaolX, posGaolY), 2000, self.current_map,self.mapArr, 10)
-     rrtStar.planning()
+     #rrtStar = RrtStar((posCarX, posCarY), (posGaolX, posGaolY), 1000, self.current_map,self.mapArr, 10, 35)
+     #rrtStar.planning()
 
      #print(posGaolX, posGaolY)
+     #self.current_map = cv2.flip(self.current_map, 0)
      cv2.imshow("map", self.current_map)
      cv2.waitKey(1)
 
   
   def goal_point_callback(self, data):
+    
     self.goalX = data.pose.position.x
     self.goalY = data.pose.position.y
 

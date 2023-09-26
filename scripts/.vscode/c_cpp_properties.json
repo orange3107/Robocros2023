@@ -1,0 +1,38 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/ilya22/ros2_humble/install/velodyne_pointcloud/include/**",
+        "/home/ilya22/ros2_humble/install/velodyne_driver/include/**",
+        "/home/ilya22/ros2_humble/install/velodyne_msgs/include/**",
+        "/home/ilya22/ros2_humble/install/velodyne_laserscan/include/**",
+        "/home/ilya22/ros2_humble/install/turtlebot3_msgs/include/**",
+        "/home/ilya22/ros2_humble/install/scanmatcher/include/**",
+        "/home/ilya22/ros2_humble/install/graph_based_slam/include/**",
+        "/home/ilya22/ros2_humble/install/ndt_omp_ros2/include/**",
+        "/home/ilya22/ros2_humble/install/lidarslam_msgs/include/**",
+        "/opt/ros/humble/include/**",
+        "/home/ilya22/ros2_humble/src/cpp_pubsub/include/**",
+        "/home/ilya22/ros2_humble/src/lidarslam_ros2/Thirdparty/ndt_omp_ros2/include/**",
+        "/home/ilya22/ros2_humble/src/lidarslam_ros2/graph_based_slam/include/**",
+        "/home/ilya22/ros2_humble/src/lidarslam_ros2/scanmatcher/include/**",
+        "/home/ilya22/ros2_humble/src/robocross2023/include/**",
+        "/home/ilya22/ros2_humble/src/ros2_usb_camera/include/**",
+        "/home/ilya22/ros2_humble/src/velodyne/velodyne_driver/include/**",
+        "/home/ilya22/ros2_humble/src/velodyne/velodyne_laserscan/include/**",
+        "/home/ilya22/ros2_humble/src/velodyne/velodyne_pointcloud/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

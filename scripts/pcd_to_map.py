@@ -24,7 +24,7 @@ class PcdToMap(Node):
       maxY = 0
       minY = 9999
       minZ = 9999
-
+ 
       for i in range(len(pcd_arr)):
         if(pcd_arr[i][2] > 0.5): 
           pcd_arr[i][0] *= 20.0

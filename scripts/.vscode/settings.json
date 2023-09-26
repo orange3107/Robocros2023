@@ -1,0 +1,22 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/ilya22/ros2_humble/install/velodyne_msgs/local/lib/python3.10/dist-packages",
+        "/home/ilya22/ros2_humble/install/turtlebot3_teleop/lib/python3.10/site-packages",
+        "/home/ilya22/ros2_humble/install/turtlebot3_example/lib/python3.10/site-packages",
+        "/home/ilya22/ros2_humble/install/turtlebot3_msgs/local/lib/python3.10/dist-packages",
+        "/home/ilya22/ros2_humble/install/lidarslam_msgs/local/lib/python3.10/dist-packages",
+        "/home/ilya22/ros2_humble/install/chicar/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/ilya22/ros2_humble/install/velodyne_msgs/local/lib/python3.10/dist-packages",
+        "/home/ilya22/ros2_humble/install/turtlebot3_teleop/lib/python3.10/site-packages",
+        "/home/ilya22/ros2_humble/install/turtlebot3_example/lib/python3.10/site-packages",
+        "/home/ilya22/ros2_humble/install/turtlebot3_msgs/local/lib/python3.10/dist-packages",
+        "/home/ilya22/ros2_humble/install/lidarslam_msgs/local/lib/python3.10/dist-packages",
+        "/home/ilya22/ros2_humble/install/chicar/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}
