@@ -57,8 +57,8 @@ class CreateCostMap(Node):
     maxY = 0
     minY = 9999
     len_arr = len(cp_array)
-    width = 300 #abs(int(maxX - minX))+1
-    height = 300 #abs(int(maxY - minY))+1
+    width = 350 #abs(int(maxX - minX))+1
+    height = 350 #abs(int(maxY - minY))+1
     
     scan_arr = np.empty((0,2))
 

@@ -41,6 +41,7 @@ install(
   scripts/pcd_to_map.py
   scripts/spawn_robot.py
   scripts/surf.py
+  scripts/calc_odom.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

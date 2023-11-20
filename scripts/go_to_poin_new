@@ -29,9 +29,9 @@ from tf2_ros import TransformException
 from geometry_msgs.msg import Twist
 from geometry_msgs.msg import PointStamped
 import csv
-from nav_msgs.msg import Path
-from geometry_msgs.msg import PoseStamped
+
 from std_msgs.msg import Float32
+from nav_msgs.msg import Path
 
 
 
@@ -42,8 +42,6 @@ class GoToPoint(Node):
     
     super().__init__('go_to_point')
 
-    self.global_path_publisher = self.create_subscription(Path, '/global_path', self.global_path, 10)
-
     self.publisherEngleGoaltoAuto = self.create_publisher(Float32, '/angle_auto_point', 10)
 
     self.subscription = self.create_subscription(
@@ -51,16 +49,25 @@ class GoToPoint(Node):
       '/poseAuto', 
       self.listener_callback, 
       10)
-    
     self.pathArr = np.empty((0,2))
-    
-    self.point_pub = self.create_subscription(PointStamped, '/clicked_point', self.listener_goal, 10)
+    with open('/home/ilya22/ros2_humble/src/robocross2023/paths/path1.csv', 'r') as file:
+     reader = csv.reader(file)
+     for index, line in enumerate(reader):
+       if(index > 0):
+        x = float(line[0])
+        y = float(line[1])
+        self.pathArr = np.append(self.pathArr, [[x, y]], axis=0)
+     
+    print(self.pathArr) 
+    #self.point_pub = self.create_subscription(PointStamped, '/clicked_point', self.listener_goal, 10)
+
+    self.sub_path = self.create_subscription(Path, '/pathWay', self.listener_path, 10)
 
     self.pubTwist = self.create_publisher(Twist, '/autocar/cmd_vel', 10)
     
     self.tfBuffer = tf2_ros.Buffer()
     self.tf = TransformListener(self.tfBuffer, self)
-    #print("go")
+    print("go")
     self.pubposemarker = self.create_publisher(Marker, '/goalPoint', 1)
     timer_period = 0.25
     self.timer = self.create_timer(timer_period, self.on_timer)
@@ -72,28 +79,28 @@ class GoToPoint(Node):
     self.goalPosY = None
     self.i = 0
 
-  def global_path(self, data):
-    self.pathArr = data.poses
-
-
   def listener_callback(self, data):
     self.x = data.pose.position.x
     self.y = data.pose.position.y
     euler = euler_from_quaternion(data.pose.orientation.x, data.pose.orientation.y, data.pose.orientation.z, data.pose.orientation.w)
 
     self.engleAuto = euler[2] 
+    
+    #print(x, y)
 
-  def listener_goal(self, data):
-    self.goalPosX = data.point.x
-    self.goalPosY = data.point.y
+  def listener_path(self, data):
+    self.goalPosX = data.poses[0].pose.position.x
+    self.goalPosY = data.poses[0].pose.position.y
+
+
 
   def on_timer(self):
-    if(len(self.pathArr) > 0):
-      self.goalPosX = self.pathArr[self.i].pose.position.x
-      self.goalPosY = self.pathArr[self.i].pose.position.y
-    else:
+
+    
+    if self.goalPosX == None:
       self.goalPosX = self.x
-      self.goalPosY = self.x
+      self.goalPosY = self.y
+
     engleGoaltoAuto = -1
     VecGoalX = 1.0
     VecGoalY = 1.0
@@ -111,14 +118,15 @@ class GoToPoint(Node):
     if self.goalPosX == None:
       marker.pose.position.x = self.x
       marker.pose.position.y = self.y
-    #elif self.goalPosX != None:
-      #marker.pose.position.x = self.goalPosX
-      #marker.pose.position.y = self.goalPosY
+    elif self.goalPosX != None:
+      marker.pose.position.x = self.pathArr[self.i][0]
+      marker.pose.position.y = self.pathArr[self.i][1]
     marker.pose.position.z = 0.0
     self.pubposemarker.publish(marker)
 
+
     cEngle = 0.3
-    linearSp = 0.3
+    linearSp = 1.0
     errEngle = math.pi/25
  
     VecAutoX = math.cos(self.engleAuto+ math.pi/2) #вектор авто
@@ -151,9 +159,10 @@ class GoToPoint(Node):
           self.tergetEngle = 0.0
         linearSp = -linearSp
 
-    #print(self.tergetEngle)
+    print(self.tergetEngle)
+
     
-    #print(engleGoaltoAuto*180/math.pi)
+    print(engleGoaltoAuto*180/math.pi)
     msg = Float32()
     msg.data = engleGoaltoAuto
     self.publisherEngleGoaltoAuto.publish(msg)
@@ -165,7 +174,7 @@ class GoToPoint(Node):
     if(self.tergetEngle < -0.8):
       self.tergetEngle = -0.8
 
-    if IsPointInCircle(self.x, self.y, self.goalPosX, self.goalPosY, 0.4):
+    if IsPointInCircle(self.x, self.y, marker.pose.position.x, marker.pose.position.y, 0.5):
       self.tergetEngle = 0.0
       linearSp = 0.0
       self.i += 1
