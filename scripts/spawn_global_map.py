@@ -66,10 +66,17 @@ class CreateGlobalMap(Node):
     img_data_int8array = [i for row in self.image_map.tolist() for i in row]
 
     for i in range(len(img_data_int8array)):
+      
       if int(img_data_int8array[i]) == 255:
         img_data_int8array[i] = -1
-      else:
-        img_data_int8array[i] = 110
+
+      elif int(img_data_int8array[i]) == 0:
+        print(int(img_data_int8array[i]))
+        img_data_int8array[i] = 100
+
+      elif int(img_data_int8array[i]) == 100:
+        print(int(img_data_int8array[i]))
+        img_data_int8array[i] = 101
 
     msg.data = img_data_int8array
     self.global_map.publish(msg)

@@ -30,9 +30,9 @@ from geometry_msgs.msg import Twist
 from geometry_msgs.msg import PointStamped
 import csv
 
-with open('/home/ilya22/ros2_humble/src/robocross2023/paths/path1.csv', 'w', newline='') as file:
+with open('/home/ilya22/ros2_humble/src/robocross2023/paths/path2.csv', 'w', newline='') as file:
      writer = csv.writer(file)
-     writer.writerow(["X", "Y"])
+     writer.writerow(["X", "Y", "A"])
 
 
 
@@ -50,17 +50,35 @@ class CreatePath(Node):
     
     self.tfBuffer = tf2_ros.Buffer()
     self.tf = TransformListener(self.tfBuffer, self)
+    self.i = 0
+    self.prev = None
     print("go")
 
   def listener_goal(self, data):
+    print(self.i)
+    self.i += 1
     self.goalPosX = data.point.x
     self.goalPosY = data.point.y
-    with open('/home/ilya22/ros2_humble/src/robocross2023/paths/path1.csv', 'a', newline='') as file:
-     writer = csv.writer(file)
-     writer.writerow([self.goalPosX, self.goalPosY])
 
+    if self.i > 1:
+
+      a = angleV1V2(0, 1, data.point.x - self.prev[0], data.point.y - self.prev[1])
+      with open('/home/ilya22/ros2_humble/src/robocross2023/paths/path2.csv', 'a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([self.prev[0], self.prev[1], a])       
+        self.prev = [data.point.x, data.point.y]
+        
+    else:
+      self.prev = [data.point.x, data.point.y]  
 
     
+    
+
+
+def angleV1V2(vec1X, vec1Y, vec2X, vec2Y):
+      c = math.atan2(vec1X*vec2Y - vec1Y*vec2X, vec1X*vec2X + vec1Y*vec2Y)
+      return c 
+
 def IsPointInCircle(x, y, xc, yc, r):
     return ((x-xc)**2+(y-yc)**2) ** 0.5 <= r
   
