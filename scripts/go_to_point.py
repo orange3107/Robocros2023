@@ -91,6 +91,7 @@ class GoToPoint(Node):
     if(len(self.pathArr) > 0):
       self.goalPosX = self.pathArr[self.i].pose.position.x
       self.goalPosY = self.pathArr[self.i].pose.position.y
+
     else:
       self.goalPosX = self.x
       self.goalPosY = self.x
@@ -118,7 +119,7 @@ class GoToPoint(Node):
     self.pubposemarker.publish(marker)
 
     cEngle = 0.3
-    linearSp = 0.3
+    linearSp = 0.0
     errEngle = math.pi/25
  
     VecAutoX = math.cos(self.engleAuto+ math.pi/2) #вектор авто
@@ -133,42 +134,33 @@ class GoToPoint(Node):
       VecGoalY = self.goalPosY - self.y
       engleGoaltoAuto = math.atan2(VecAutoX*VecGoalY - VecAutoY*VecGoalX, VecAutoX*VecGoalX + VecAutoY*VecGoalY)
 
-      if(0 <= engleGoaltoAuto < math.pi/2 or -math.pi/2 <= engleGoaltoAuto < 0):
-        if(engleGoaltoAuto < -errEngle):
-          self.tergetEngle -=cEngle
-        elif(engleGoaltoAuto > errEngle):
-          self.tergetEngle +=cEngle
-        else:
-          self.tergetEngle = 0.0
-        linearSp = abs(linearSp)
-        
-      else:
-        if(math.pi/2 < engleGoaltoAuto < math.pi + errEngle):
-          self.tergetEngle -=cEngle
-        elif(engleGoaltoAuto > -math.pi + errEngle):
-          self.tergetEngle +=cEngle
-        else:
-          self.tergetEngle = 0.0
-        linearSp = -linearSp
 
-    #print(self.tergetEngle)
+      if abs(engleGoaltoAuto) < math.pi/2 :
+        linearSp = 0.3
+        if engleGoaltoAuto < 0:
+          self.tergetEngle = convert(engleGoaltoAuto, 0, -math.pi/2, 0, -0.8)
+
+        elif engleGoaltoAuto > 0:
+          self.tergetEngle = convert(engleGoaltoAuto, 0, math.pi/2, 0, 0.8)
+
+        else:
+          self.tergetEngle = 0.0
+
+      else:
+        print("sstop")
+        self.tergetEngle = 0.0
+        linearSp = 0.0
+
+    self.tergetEngle = 8 * self.tergetEngle
+    print(self.tergetEngle)
     
     #print(engleGoaltoAuto*180/math.pi)
     msg = Float32()
     msg.data = engleGoaltoAuto
     self.publisherEngleGoaltoAuto.publish(msg)
 
-
-    if(self.tergetEngle > 0.8):
-      self.tergetEngle = 0.8
-    
-    if(self.tergetEngle < -0.8):
-      self.tergetEngle = -0.8
-
-    if IsPointInCircle(self.x, self.y, self.goalPosX, self.goalPosY, 0.4):
-      self.tergetEngle = 0.0
-      linearSp = 0.0
-      self.i += 1
+    if IsPointInCircle(self.x, self.y, self.goalPosX, self.goalPosY, 0.3):
+      self.i += 0
 
     
     twist = Twist()
@@ -181,7 +173,54 @@ class GoToPoint(Node):
     twist.angular.z = self.tergetEngle
 
     self.pubTwist.publish(twist)
+
+
+def checkR(R,pointP, pointC):
+      mode = ''
+      boolCheck = False
+      #print(math.degrees(pointP[2]))
+      vec1X = math.cos(pointP[2] + math.pi/2)
+      vec1Y = math.sin(pointP[2] + math.pi/2)
+
+      #rotatedX = 17*math.sin(sP.a) + sP.x
+      #rotatedY = 17*math.cos(sP.a) + sP.y
+
+      vec2X = pointC[0]- pointP[0]
+      vec2Y = pointC[1]- pointP[1]
+
+      anglePC = angleV1V2(vec1X, vec1Y, vec2X, vec2Y)
+      
+      if anglePC <= 0:
+         mode = 'R'
+      else:
+         mode = 'L'
+
+      dist = distance(pointP[0], pointP[1], pointC[0], pointC[1])
+      r = dist/(2*math.cos((math.pi/2)-abs(anglePC)))
+      if(r >= R and abs(anglePC) < math.pi/2):
+         boolCheck = True
+      angleAcr = 2*anglePC
+      angleNew = angleAcr
+
+      L = abs(math.pi*r*math.degrees(angleAcr))/180
+      info = [boolCheck, r, mode, angleAcr, angleNew, L]
+
+      return info
+
+
+def angleV1V2(vec1X, vec1Y, vec2X, vec2Y):
+      c = math.atan2(vec1X*vec2Y - vec1Y*vec2X, vec1X*vec2X + vec1Y*vec2Y)
+      return c
+  
+def distance(p1, p2):
+      c = math.sqrt((p2[0]-p1[0])**2 + (p2[1]-p1[1])**2)
+      return c
     
+def convert(old, old_min, old_max, new_min, new_max):
+  old_range = old_max - old_min  
+  new_range = new_max - new_min  
+  converted = (((old - old_min) * new_range) / old_range) + new_min
+  return converted
     
 def IsPointInCircle(x, y, xc, yc, r):
     return ((x-xc)**2+(y-yc)**2) ** 0.5 <= r

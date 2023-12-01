@@ -29,6 +29,7 @@ install(
   scripts/rrtStar.cpp
   scripts/create_path.py
   scripts/local_rrt_star.py
+  scripts/global_rrt_star.py
   scripts/go_to_point.py
   scripts/car_in_global_map.py
   scripts/static_turtle_tf2_broadcaster.py
@@ -37,6 +38,7 @@ install(
   scripts/create_local_cost_map.py
   scripts/create_local_cost_map_old.py
   scripts/create_local_cost_map_new.py
+  scripts/test_r_auto.py
   scripts/spawn_global_map.py
   scripts/pcd_to_map.py
   scripts/spawn_robot.py

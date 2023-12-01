@@ -191,7 +191,47 @@ class GoToPoint(Node):
 
     self.pubTwist.publish(twist)
     
-    
+def checkR(R,pointP, pointC):
+      mode = ''
+      boolCheck = False
+      #print(math.degrees(pointP[2]))
+      vec1X = math.cos(pointP[2] + math.pi/2)
+      vec1Y = math.sin(pointP[2] + math.pi/2)
+
+      #rotatedX = 17*math.sin(sP.a) + sP.x
+      #rotatedY = 17*math.cos(sP.a) + sP.y
+
+      vec2X = pointC[0]- pointP[0]
+      vec2Y = pointC[1]- pointP[1]
+
+      anglePC = angleV1V2(vec1X, vec1Y, vec2X, vec2Y)
+      
+      if anglePC <= 0:
+         mode = 'R'
+      else:
+         mode = 'L'
+
+      dist = distance(pointP[0], pointP[1], pointC[0], pointC[1])
+      r = dist/(2*math.cos((math.pi/2)-abs(anglePC)))
+      if(r >= R and abs(anglePC) < math.pi/2):
+         boolCheck = True
+      angleAcr = 2*anglePC
+      angleNew = angleAcr
+
+      L = abs(math.pi*r*math.degrees(angleAcr))/180
+      info = [boolCheck, r, mode, angleAcr, angleNew, L]
+
+      return info
+
+
+def angleV1V2(vec1X, vec1Y, vec2X, vec2Y):
+      c = math.atan2(vec1X*vec2Y - vec1Y*vec2X, vec1X*vec2X + vec1Y*vec2Y)
+      return c
+  
+def distance(p1, p2):
+      c = math.sqrt((p2[0]-p1[0])**2 + (p2[1]-p1[1])**2)
+      return c
+
 def IsPointInCircle(x, y, xc, yc, r):
     return ((x-xc)**2+(y-yc)**2) ** 0.5 <= r
   

@@ -57,14 +57,14 @@ class CreateCostMap(Node):
     maxY = 0
     minY = 9999
     len_arr = len(cp_array)
-    width = 350 #abs(int(maxX - minX))+1
-    height = 350 #abs(int(maxY - minY))+1
+    width = 500 #abs(int(maxX - minX))+1
+    height = 500 #abs(int(maxY - minY))+1
     
     scan_arr = np.empty((0,2))
 
     for i in range(len_arr-1, 0, -1):
              
-        if(checkPoint(7, cp_array[i][0], cp_array[i][1]) and ((cp_array[i][0] > 1.5 or cp_array[i][1] > 3.5) or (cp_array[i][0] < -1.5 or cp_array[i][1] < -4)) and cp_array[i][2] > -1.6 and cp_array[i][2] < 10):
+        if(checkPoint(15, cp_array[i][0], cp_array[i][1]) and ((cp_array[i][0] > 1.5 or cp_array[i][1] > 3.5) or (cp_array[i][0] < -1.5 or cp_array[i][1] < -4)) and cp_array[i][2] > -1.6 and cp_array[i][2] < 10):
 
           cp_array[i][0] *= 20.0
           cp_array[i][1] *= 20.0
@@ -113,8 +113,8 @@ class CreateCostMap(Node):
           centrY = height/2#(((0 - minY) * new_range) / old_range)
 
           #cp_array_list[int(cp_array[i][1])-1][int(cp_array[i][0])-1] = 100
-          if(checkPoint(5, cp_array[i][0] - centrX, cp_array[i][1] - centrY) == False):
-            self.image_map = cv2.circle(self.image_map, (int(cp_array[i][0]), int(cp_array[i][1])), 25, (100,100,100), -1)
+          if(checkPoint(15, cp_array[i][0] - centrX, cp_array[i][1] - centrY) == False):
+            self.image_map = cv2.circle(self.image_map, (int(cp_array[i][0]), int(cp_array[i][1])), 35, (100,100,100), -1)
           #image_map = cv2.rectangle(image_map, (int(centrX) - 40, int(centrY) + 70), (int(centrX)+20, int(centrY)), (100, 100, 0), -1)
 
     self.publisher_.publish(self.br.cv2_to_imgmsg(self.image_map))
