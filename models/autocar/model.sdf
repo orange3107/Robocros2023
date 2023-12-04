@@ -31,6 +31,15 @@
       </axis>
     </joint>
 
+    <joint name="odom_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>odometry</child>
+      <pose>0 -1 0 0 0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
     <joint name="front_camera_joint" type="fixed">
       <parent>base_link</parent>
       <child>front_camera_link</child>
@@ -40,9 +49,9 @@
       </axis>
     </joint>
 
-
+  <link name="odometry" />
+  
   <link name="front_camera_link">
-
   <pose>0 0 1.4 0 0 1.57</pose>
 
   <visual name="camera_visual">
@@ -146,7 +155,7 @@
         <ray>
           <scan>
             <horizontal>
-              <samples>70</samples>
+              <samples>100</samples>
               <resolution>1</resolution>
               <min_angle>-0.7853981</min_angle>
               <max_angle>3.9269908</max_angle>

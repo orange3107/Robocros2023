@@ -114,7 +114,7 @@ class CreateCostMap(Node):
 
           #cp_array_list[int(cp_array[i][1])-1][int(cp_array[i][0])-1] = 100
           if(checkPoint(15, cp_array[i][0] - centrX, cp_array[i][1] - centrY) == False):
-            self.image_map = cv2.circle(self.image_map, (int(cp_array[i][0]), int(cp_array[i][1])), 35, (100,100,100), -1)
+            self.image_map = cv2.circle(self.image_map, (int(cp_array[i][0]), int(cp_array[i][1])), 5, (100,100,100), -1)
           #image_map = cv2.rectangle(image_map, (int(centrX) - 40, int(centrY) + 70), (int(centrX)+20, int(centrY)), (100, 100, 0), -1)
 
     self.publisher_.publish(self.br.cv2_to_imgmsg(self.image_map))

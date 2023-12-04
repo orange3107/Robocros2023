@@ -38,6 +38,7 @@ class TestRAuto(Node):
     self.posX = None
     self.i = 0
     self.poses = np.empty((0,3))
+    self.XY = np.empty((0,2))
 
     self.subscription = self.create_subscription(
       Marker, 
@@ -45,6 +46,8 @@ class TestRAuto(Node):
       self.poseAuto_collback, 
       10)
     
+    self.global_path_publisher = self.create_publisher(Path, '/test_path', 10)
+
     self.timer = self.create_timer(3.0, self.on_timer)
 
     with open('/home/ilya22/ros2_humble/src/robocross2023/paths/testRAuto.csv', 'w', newline='') as file:
@@ -54,11 +57,33 @@ class TestRAuto(Node):
        
        
   def poseAuto_collback(self, data):
+      
       euler = euler_from_quaternion(data.pose.orientation.x, data.pose.orientation.y, data.pose.orientation.z, data.pose.orientation.w)
       self.eulerAuto = euler[2]
       #print(self.eulerAuto)
+
       self.posX = data.pose.position.x
       self.posY = data.pose.position.y
+
+      self.XY = np.append(self.XY, [[self.posX, self.posY]], axis=0)
+
+      msg = Path()
+      msg.header.frame_id = "map"
+      print(self.XY)
+      if len(np.shape(self.XY)) > 1:
+        for i in range(len(self.XY)):
+          pose = PoseStamped()
+          pose.pose.position.x = float(self.XY[i][0])
+          pose.pose.position.y = float(self.XY[i][1])
+          pose.pose.position.z = 0.0
+
+          pose.pose.orientation.x = 0.0
+          pose.pose.orientation.y = 0.0
+          pose.pose.orientation.z = 0.0
+          pose.pose.orientation.w = 0.0
+          msg.poses.append(pose)
+
+      self.global_path_publisher.publish(msg)
       
 
 
@@ -77,6 +102,10 @@ class TestRAuto(Node):
         print(info)
         self.i = 0
         self.poses = np.empty((0,3))
+
+
+      
+      
 
   def checkR(self, R,pointP, pointC):
       mode = ''

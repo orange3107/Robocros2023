@@ -40,6 +40,7 @@ class CarInGlobalMap(Node):
     self.tf = TransformListener(self.tfBuffer, self)
     print("go")
     self.pubposemarker = self.create_publisher(Marker, '/poseAuto', 1)
+    self.pubodomemarker = self.create_publisher(Marker, '/odomAuto', 1)
     timer_period = 0.1
     self.timer = self.create_timer(timer_period, self.on_timer)
 
@@ -52,7 +53,40 @@ class CarInGlobalMap(Node):
       now = rclpy.time.Time()
       trans = self.tfBuffer.lookup_transform(
                   'map',
-                  'base_link',
+                  'velodyne',
+                  now)
+      marker = Marker()
+      marker.header.frame_id = "/map"
+      marker.type = marker.SPHERE
+      marker.action = marker.ADD
+      marker.scale.x = 0.2
+      marker.scale.y = 0.2
+      marker.scale.z = 0.2
+      marker.color.a = 1.0
+      marker.color.r = 1.0
+      marker.color.g = 1.0
+      marker.color.b = 0.0
+      marker.pose.position.x = trans.transform.translation.x
+      marker.pose.position.y = trans.transform.translation.y
+      marker.pose.position.z = 0.0
+
+      #print(trans.transform.translation.x, " ", trans.transform.translation.y)
+
+      marker.pose.orientation.x = trans.transform.rotation.x
+      marker.pose.orientation.y = trans.transform.rotation.y
+      marker.pose.orientation.z = trans.transform.rotation.z
+      marker.pose.orientation.w = trans.transform.rotation.w
+      euler = euler_from_quaternion(trans.transform.rotation.x, trans.transform.rotation.y, trans.transform.rotation.z, trans.transform.rotation.w)
+      print(euler[2])
+      self.pubposemarker.publish(marker)
+    except TransformException as ex:
+        print("err")
+
+    try:
+      now = rclpy.time.Time()
+      trans = self.tfBuffer.lookup_transform(
+                  'map',
+                  'odometry',
                   now)
       marker = Marker()
       marker.header.frame_id = "/map"
@@ -77,7 +111,7 @@ class CarInGlobalMap(Node):
       marker.pose.orientation.w = trans.transform.rotation.w
       euler = euler_from_quaternion(trans.transform.rotation.x, trans.transform.rotation.y, trans.transform.rotation.z, trans.transform.rotation.w)
       print(euler[2])
-      self.pubposemarker.publish(marker)
+      self.pubodomemarker.publish(marker)
     except TransformException as ex:
         print("err")
     return

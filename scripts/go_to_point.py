@@ -48,7 +48,7 @@ class GoToPoint(Node):
 
     self.subscription = self.create_subscription(
       Marker, 
-      '/poseAuto', 
+      '/odomAuto', 
       self.listener_callback, 
       10)
     
@@ -145,14 +145,33 @@ class GoToPoint(Node):
 
         else:
           self.tergetEngle = 0.0
+        self.tergetEngle = 8*self.tergetEngle
 
       else:
-        print("sstop")
-        self.tergetEngle = 0.0
-        linearSp = 0.0
+        if(engleGoaltoAuto > 0):
+            print(math.pi, engleGoaltoAuto)
+            engleGoaltoAuto = (math.pi - engleGoaltoAuto)
 
-    self.tergetEngle = 8 * self.tergetEngle
+        else:
+            engleGoaltoAuto = (-math.pi - engleGoaltoAuto)
+
+
+        linearSp = -0.3
+        if engleGoaltoAuto < 0:
+          self.tergetEngle = -convert(engleGoaltoAuto, 0, -math.pi/2, 0, -0.8)
+
+        elif engleGoaltoAuto > 0:
+          self.tergetEngle = -convert(engleGoaltoAuto, 0, math.pi/2, 0, 0.8)
+
+        else:
+          self.tergetEngle = 0.0
+
+        self.tergetEngle = 5*self.tergetEngle
+
+      
     print(self.tergetEngle)
+    
+    
     
     #print(engleGoaltoAuto*180/math.pi)
     msg = Float32()

@@ -84,8 +84,11 @@ class RrtStar:
                img = cv2.circle(img,(i, f), 3, (100,100,100), -1)
    
       k = 0
+      img = cv2.circle(img,(self.start.x, self.start.y), 10, (0,0,255), -1)
       while k < self.iterations:
-         node = self.rndPont((width*3, int(height*3 - height/3)), int(height/3), width*3/2 - width/2)
+         node = self.rndPont((width*3, int(height*3)), (height/6), width*3/2 - width/2)
+         #node = self.rndPont((width, height/2), 0, 0)
+
          img = cv2.circle(img,(node[0], node[1]), 3, (0,255,0), -1)
          min = 9999.0
          minPoint = -1
@@ -96,9 +99,9 @@ class RrtStar:
             check = self.checkR(self.RCar, [self.Waypoints[i].x, self.Waypoints[i].y, self.Waypoints[i].a], pointBuff)
             
             if check[0]:
-               ch = True
                arc = self.getArc(check[2], check[1], 2, check[3], self.Waypoints[i], img, check[1])
                ch = self.checkTouch(arc, check, self.Waypoints[i], img, width, height)
+
                if ch:
                   min = self.lenPoints(self.Waypoints[i], node)
                   minPoint = i
@@ -128,7 +131,6 @@ class RrtStar:
 
                     if self.Waypoints[i].lenghtPath + check[5] < min:
                       if check[0]:
-                        ch = True
                         arc = self.getArc(check[2], check[1], 2, check[3], self.Waypoints[i], img, check[1])
                         ch = self.checkTouch(arc, check, self.Waypoints[i], img, width, height)
                         if ch:
@@ -147,10 +149,10 @@ class RrtStar:
             
                if(point.parent != -1 and point.a != 0):
                   self.Waypoints = np.append(self.Waypoints, point)
-                  img = cv2.circle(img,(point.x,point.y), 3, (0,0,255), -1)
+                  #img = cv2.circle(img,(point.x,point.y), 3, (0,0,255), -1)
                   rotatedX = 17*math.cos(point.a + math.pi/2) + point.x
                   rotatedY = 17*math.sin(point.a + math.pi/2) + point.y
-                  img = cv2.line(img,(int(point.x),int(point.y)),(int(rotatedX),int(rotatedY)),(255,0,0),1)
+                  #img = cv2.line(img,(int(point.x),int(point.y)),(int(rotatedX),int(rotatedY)),(255,0,0),1)
                         
                   k += 1
 
@@ -208,19 +210,10 @@ class RrtStar:
                         if abs((check[4] + point.a) - (self.goals[i][2])) < 0.3 and point.a != 0 and check[5] < 300 : 
                            #[boolCheck, r, mode, angleAcr, angleNew, L]
                            arc = self.getArc(check[2], check[1], 2, check[3], point, img, check[1])
-                           
-                           for j in range(len(arc)):
-                                 if len(arc) > 3:
-                                    #print(i)
-                                    #print(int(arc[i][0]))
-                                    if int(arc[j][0]) > int(width - 1) or int(arc[j][1]) > int(height - 1):
-                                       break
-                                    #print(arc[i][0], arc[i][1])
-                                    if np.any(self.gridArray[int(arc[j][0])][int(arc[j][1])]) != 0:
-                                       c = False
-                                       break
+                           ch = self.checkTouch(arc, check, point, img, width, height)
+                           #ch = True
 
-                           if c :
+                           if ch :
                               img = cv2.circle(img,(int(point.x),int(point.y)), 4, (0,255,255), -1)
 
                               rotatedX = 17*math.cos(point.a + math.pi/2) + point.x
@@ -237,7 +230,7 @@ class RrtStar:
                               #print(point.a, goal.a, check[4]+point.a)
                   #print("dsfgvmuhygtgyhuijikytvosyudfibv")
                   if np.any(correctGoal) != None : 
-                     print("end", k)
+                     #print("end", k)
                      break
                                         
                else:
@@ -358,6 +351,7 @@ class RrtStar:
             localPath[i][3] = r
             #print(x, y, a)
             pose = PoseStamped()
+            #print(x1, y1)
             pose.pose.position.x = x1
             pose.pose.position.y = y1
             pose.pose.position.z = 0.0
@@ -384,6 +378,12 @@ class RrtStar:
       img = cv2.flip(img, 0)
       cv2.imshow("Image", img)
       cv2.waitKey(1)
+      cv2.imshow("Image", img)
+      cv2.waitKey(1)
+      cv2.imshow("Image", img)
+      cv2.waitKey(1)
+      cv2.imshow("Image", img)
+      cv2.waitKey(1)
 
       return localPath, correctGoal
 
@@ -396,16 +396,22 @@ class RrtStar:
       ch = False
       if len(np.shape(arc)) > 1:
          ch = True
-         arc = self.getArc(check[2], check[1], 2, check[3], Waypoints, img, check[1])
-         for j in range(len(arc)):
-            
-            if int(arc[j][0]) < width and int(arc[j][1]) < height and np.any(self.gridArray[int(arc[j][0])-1][int(arc[j][1])-1]) != 0 :
+         #arc = self.getArc(check[2], check[1], 2, check[3], Waypoints, img, check[1])
+         for j in range(len(arc)):          
+            if int(arc[j][0]) < width and int(arc[j][1]) < height and int(arc[j][0]) > 0 and int(arc[j][1]) > 0 and np.any(self.gridArray[int(arc[j][0])-1][int(arc[j][1])-1]) != 0 :
                ch = False
       #print(print(int(arc[j][0]), int(arc[j][1])), ch)      
       return ch
 
 
    def getArc(self, mode, maxc, step_size, angleAcr, sP, img, r):
+      #print("angleAcr", angleAcr)
+
+      d = True
+      if mode == '-R' or mode == '-L':
+         d = False
+      #print("d", d)
+      
       font = cv2.FONT_HERSHEY_SIMPLEX 
       color = (255, 255, 255) 
       fontScale = 0.5
@@ -418,7 +424,8 @@ class RrtStar:
       
       #img = cv2.line(img,(int(sP.x),int(sP.y)),(int(rotatedX),int(rotatedY)),(255,255,255),1)
 
-      L = abs(math.pi*maxc*math.degrees(angleAcr))/180
+      L = abs(math.pi*maxc*(math.degrees(angleAcr)))/180
+      #print("L", L)
       point_num = int(L / step_size)+1 # колличество точек для отрисовки локального пути
       if(point_num < 2):
          return [sP.x, sP.y, sP.a, -1]
@@ -431,43 +438,36 @@ class RrtStar:
          localArc = np.append(localArc, [[0,0,0,-1]], axis=0)
       
       localArc[0][2] = sP.a
+      #print("sP.a",sP.a)
 
       #print("old", localArc[0][2], mode)
 
       #print(localArc)
       #len_step = L/(point_num) 
       an = 0
-      if mode == 'R':
+      if mode == 'R' or mode == '-R':
         an = sP.a
         #print("a", sP.a)
         localArc[0][0] -= maxc
         r = -r
         #localArc[point_num].a = math.pi/2 + angleAcr
 
-      if mode == 'L':
+      if mode == 'L' or mode == '-L':
         an = 0
-        #localArc[point_num].a = angleAcr
         localArc[0][0] += maxc
         
-      
-      directions = [0 for _ in range(point_num)] # создание массивов для точек
+
 
       angleStep = angleAcr/point_num
-
       angleStep1 = angleAcr/(point_num)
-      #print("angleStep:", angleStep1)
-
-      if L > 0.0:
-        directions[0] = 1
+      
+      if d:
+         ll = angleStep
       else:
-        directions[0] = -1
+         ll = angleStep
 
-      if L > 0.0:
-        d = step_size
-      else:
-        d = -step_size
-
-      ll = angleStep
+         
+         
       #len_buff = len_step + sP.lenghtPath
       #print(mode)
 
@@ -479,21 +479,34 @@ class RrtStar:
       
       for i in range(1, point_num):
         
-         if mode == 'R':
+         if mode == 'R' or mode == '-R':
             ll -= angleStep
             localArc[i][0] = x*math.cos(ll)+y*math.sin(ll)+ maxc
             localArc[i][1] = y*math.cos(ll)-x*math.sin(ll)
+            
             a = an
-            an -= abs(angleStep1)
+            if d:   
+               an -= abs(angleStep1)
+            else:
+               an += abs(angleStep1)
+
             
              
 
-         elif mode == 'L':
+         elif mode == 'L' or mode == '-L':
+            #print("an", an)
             ll -= angleStep
             localArc[i][0] = x*math.cos(ll)+y*math.sin(ll)- maxc
             localArc[i][1] = y*math.cos(ll)-x*math.sin(ll)
-            a = an + sP.a
-            an += abs(angleStep1) 
+            
+
+
+            a = an + sP.a 
+            if d:   
+               an += abs(angleStep1)
+            else:
+               an -= abs(angleStep1)
+            #print("a", a)
 
          #localArc[i].parent = parent
          parent += 1
@@ -505,6 +518,8 @@ class RrtStar:
          #print(a)
 
       localArc[point_num-1][2] = angleAcr + sP.a
+      localArc[0][1] = sP.y
+      localArc[0][0] = sP.x
       #print("new", localArc[point_num-1][2])
 
       angle = sP.a 
@@ -516,10 +531,10 @@ class RrtStar:
          localArc[i][1] = y*math.cos(angle)+x*math.sin(angle) + sP.y
          localArc[i][3] = r
 
-         #print(localArc[i][2])
+         #print("pa", localArc[i][0], localArc[i][1])
 
-         rotatedX = 50*math.cos(localArc[i][2] + math.pi/2) + localArc[i][0]
-         rotatedY = 50*math.sin(localArc[i][2] + math.pi/2) + localArc[i][1]
+         #rotatedX = 50*math.cos(localArc[i][2] + math.pi/2) + localArc[i][0]
+         #rotatedY = 50*math.sin(localArc[i][2] + math.pi/2) + localArc[i][1]
          #img = cv2.circle(img,(int(localArc[i][0]),int(localArc[i][1])), 2, (0,255,0), -1)
          
          
@@ -528,8 +543,6 @@ class RrtStar:
          #img = cv2.circle(img,(100,100), 3, (0,255,0), -1)
         
          #print(math.degrees(localArc[i].a)) 
-      localArc[0][0] = sP.x
-      localArc[0][1] = sP.y
       #localArc[0].parent = pointParent
       #img = cv2.line(img,(int(sP.x),int(sP.y)),(int(rotatedX),int(rotatedY)),(255,255,255),1)
 
@@ -543,6 +556,7 @@ class RrtStar:
 
       #print(L)
       #print(len_arr)
+
      
       return localArc       
 
@@ -573,14 +587,26 @@ class RrtStar:
 
       dist = self.distance(pointP[0], pointP[1], pointC[0], pointC[1])
       r = dist/(2*math.cos((math.pi/2)-abs(anglePC)))
-      if(r >= R and abs(anglePC) < math.pi/2):
-         boolCheck = True
-      angleAcr = 2*anglePC
-      angleNew = angleAcr
+      if(r >= R):
+         boolCheck = True  
 
+      if abs(anglePC) > math.pi/2:
+         mode = '-' + mode   
+         angleAcr = 2*anglePC
+         if(angleAcr > 0):
+            angleAcr = -(2*math.pi - angleAcr)
+
+         else:
+            angleAcr = -(-2*math.pi - angleAcr)
+   
+      else:
+         angleAcr = 2*anglePC
+         
+
+      angleNew = angleAcr
       L = abs(math.pi*r*math.degrees(angleAcr))/180
       info = [boolCheck, r, mode, angleAcr, angleNew, L]
-
+      #print(boolCheck, pointC)
       return info
        
 
@@ -667,6 +693,11 @@ class CreateLocalRrt(Node):
     self.height = 0
     self.width = 0
     self.mapArr = np.empty((1,1))
+    self.cPoint = 0
+
+    self.odomX = 0
+    self.odomY = 0
+    self.eulerOdom = 0
 
     self.timer = self.create_timer(0.5, self.timer_path_callback)
     self.timer1 = self.create_timer(0.1, self.timer_path_out)
@@ -699,6 +730,12 @@ class CreateLocalRrt(Node):
       Marker, 
       '/poseAuto', 
       self.poseAuto_collback, 
+      10)
+    
+    self.subscription = self.create_subscription(
+      Marker, 
+      '/odomAuto', 
+      self.odomAuto_collback, 
       10)
 
     self.subscription = self.create_subscription(
@@ -752,9 +789,10 @@ class CreateLocalRrt(Node):
 
       for i in range(int(len(self.pathArr)/4)):
          #print(self.carX, self.carY, self.pathArr[i][0], self.pathArr[i][1])
-         if self.IsPointInCircle(self.posX, self.posY, self.pathArr[i][0], self.pathArr[i][1], 0.2) and i < len(self.pathArr)-1:
+         if self.IsPointInCircle(self.odomX, self.odomY, self.pathArr[i][0], self.pathArr[i][1], 0.2) and i < len(self.pathArr)-1 and i - self.cPoint < 2:
             #print("delete")
             self.pathArr = np.delete(self.pathArr, np.s_[0:i+1], axis = 0)
+            self.cPoint = i
             break
       
       
@@ -794,6 +832,8 @@ class CreateLocalRrt(Node):
       c = 0
       posCarX = -int(20*self.carX)
       posCarY = width+int(20*self.carY)  
+      self.cPoint = 0
+      print(self.posX,self.posY, posCarX, posCarY)
 
       
 
@@ -805,7 +845,7 @@ class CreateLocalRrt(Node):
          pa = self.pathArr[i][2]
          #print(px, py, pa)
          p = self.global_point_in_local_map(self.posX,self.posY, posCarX, posCarY, [px, py, pa])
-      
+         
          #print("p", p)
          x,y,a = p[0],p[1],p[2]
          
@@ -868,8 +908,10 @@ class CreateLocalRrt(Node):
              #print("препядствие: ", pr)
              #print(imageMapArr[pr[1], pr[0]])
              if start == False:
-               self.corrStartI = includePoints[i][3]             
-               startPoint = [width/2, width/2, 0]
+               self.corrStartI = includePoints[i][3]
+               p = self.global_point_in_local_map(self.posX,self.posY, posCarX, posCarY, [self.odomX, self.odomY, self.eulerOdom])
+             
+               startPoint = [p[0], p[1], p[2]]
                #print("нашли старт: ", backPoint)
                #print('i = ', i)
                start = True
@@ -900,7 +942,7 @@ class CreateLocalRrt(Node):
              #print(startPoint)
              if np.any(startPoint) != None:
               #print("endPoints", endPoints)
-              rrtStar = RrtStar((startPoint), endPoints, 250, imageMapArr, 30, 70, self.eulerAuto, self.posX, self.posY, self.waypoint_publisher, 35)
+              rrtStar = RrtStar((startPoint), endPoints, 200, imageMapArr, 30, 70, self.eulerAuto, self.posX, self.posY, self.waypoint_publisher, 35)
               print("GO")
               path, correctGoal = rrtStar.planning()
               print("goal", correctGoal)
@@ -987,6 +1029,14 @@ class CreateLocalRrt(Node):
       #print(self.eulerAuto)
       self.posX = data.pose.position.x
       self.posY = data.pose.position.y
+      #print("pose", self.posX, self.posY)
+
+   def odomAuto_collback(self, data):
+      euler = euler_from_quaternion(data.pose.orientation.x, data.pose.orientation.y, data.pose.orientation.z, data.pose.orientation.w)      
+      self.eulerOdom = euler[2]
+      #print(self.eulerAuto)
+      self.odomX = data.pose.position.x
+      self.odomY = data.pose.position.y
       #print("pose", self.posX, self.posY)
 
    def local_map_image_collback(self, data):
