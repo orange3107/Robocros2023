@@ -166,7 +166,7 @@ class GoToPoint(Node):
         else:
           self.tergetEngle = 0.0
 
-        self.tergetEngle = 5*self.tergetEngle
+        self.tergetEngle = 8*self.tergetEngle
 
       
     print(self.tergetEngle)

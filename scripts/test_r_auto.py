@@ -42,7 +42,7 @@ class TestRAuto(Node):
 
     self.subscription = self.create_subscription(
       Marker, 
-      '/poseAuto', 
+      '/odomAuto', 
       self.poseAuto_collback, 
       10)
     
