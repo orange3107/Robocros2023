@@ -24,6 +24,8 @@ from random import randint
 from nav_msgs.msg import Path
 from geometry_msgs.msg import PoseStamped
 import csv
+from time import sleep
+from std_msgs.msg import UInt32MultiArray, Float32, Bool, String
 
 class Points:
     def __init__(self, X, Y, A):
@@ -92,7 +94,7 @@ class RrtStar:
       #img = cv2.rectangle(img, (int(car[0][0]),int(car[0][1])), (int(car[2][0]),int(car[2][1])), (255,255,255), 2)
 
 
-      img = cv2.circle(img,(self.start.x, self.start.y), 10, (0,0,255), -1)
+      #img = cv2.circle(img,(self.start.x, self.start.y), 10, (0,0,255), -1)
 
       p = Points(250, 300, -math.pi/2)
       p1 = [135,250]
@@ -101,6 +103,7 @@ class RrtStar:
       
 
       while k < self.iterations:
+
          scale_percent = 150 # percent of original size
          width1 = int(height * scale_percent / 100)
          height1 = int(width * scale_percent / 100)
@@ -114,27 +117,56 @@ class RrtStar:
          #node = self.rndPont((width*3, int(height*3)), -(height*3/2 - height/2), width*3/2 - width/2)
          node = self.rndPont((width, height), height/6, 0)
 
-         img = cv2.circle(img,(node[0], node[1]), 3, (0,255,0), -1)
+         #img = cv2.circle(img,(node[0], node[1]), 3, (0,255,0), -1)
          min = 9999.0
          minPoint = -1
          point = Points(None, None, None)
          mode = ''
 
          for i in range(len(self.Waypoints)):
-            if self.Waypoints[i].children < 2:
+            if self.Waypoints[i].children < 3:
                dist = self.distance(node[0], node[1], self.Waypoints[i].x, self.Waypoints[i].y)
                if dist < min:  
                   pointBuff = self.steerPoint(self.Waypoints[i], node, width, height, self.stp)
                   ch, check = self.checkMain(self.Waypoints[i], pointBuff, img)
-                  if ch:
-                     
-                        min = dist
-                        point.x = pointBuff[0]
-                        point.y = pointBuff[1]
-                        point.a = check[4]
-                        point.parent = i
-                        self.Waypoints[i].children += 1
-                        mode = check[2]
+
+                  if ch == False and check[0] == True:
+                     arc = self.getArc(check[2], check[1], 10, check[3], self.Waypoints[i], img, check[1])
+
+                     if len(np.shape(arc)) > 1:
+                        ch = False
+                        #arc = self.getArc(check[2], check[1], 2, check[3], Waypoints, img, check[1])
+                        #[boolCheck, r, mode, angleAcr, angleNew, L]
+                        for j in range(len(arc)):
+                           car = self.getLocalCar((arc[j][0], arc[j][1]), arc[j][2], width, height, img)
+                           #img = cv2.circle(img,(int(arc[j][0]),  int(arc[j][1])), 1, (255,255,255), -1)
+                           #sleep(0.1)
+                           cv2.imshow("Image", img)
+                           cv2.waitKey(1)    
+                           chCar = self.checkTouch(car, width, height)
+
+                           if chCar:
+                              if j > 1:
+                                 ch = True
+                                 pointBuff[0] = arc[j][0]
+                                 pointBuff[1] = arc[j][1]
+                                 check[4] = arc[j][2]                                    
+                           else:
+                              break
+
+                  if ch:                     
+                     min = dist
+                     point.x = pointBuff[0]
+                     point.y = pointBuff[1]
+                     point.a = check[4]
+                     #img = cv2.circle(img,(point.x,  point.y), 3, (0,255,0), -1)
+                     rotatedX = 17*math.cos(point.a + math.pi/2) + point.x
+                     rotatedY = 17*math.sin(point.a + math.pi/2) + point.y
+                     #img = cv2.line(img,(int(point.x),int(point.y)),(int(rotatedX),int(rotatedY)),(255,0,0),1)
+
+                     point.parent = i
+                     self.Waypoints[i].children += 1
+                     mode = check[2]
 
 
 
@@ -266,7 +298,7 @@ class RrtStar:
 
                   for j in range(len(car)): 
                      None        
-                     #img = cv2.circle(img,(int(car[j][0]), int(car[j][1])), 2, (0,0,255), -1)                        
+                     img = cv2.circle(img,(int(car[j][0]), int(car[j][1])), 2, (0,0,255), -1)                        
                   #k += 1
 
                   
@@ -317,7 +349,7 @@ class RrtStar:
                      if check[0]:
                         c = True
                         
-                        img = cv2.circle(img,(int(goal.x),int(goal.y)), 3, (255,255,255), -1)
+                        #img = cv2.circle(img,(int(goal.x),int(goal.y)), 3, (255,255,255), -1)
 
                         rotatedX = 17*math.cos(goal.a + math.pi/2) + goal.x
                         rotatedY = 17*math.sin(goal.a + math.pi/2) + goal.y
@@ -333,13 +365,13 @@ class RrtStar:
                            #ch = True
 
                            if ch :
-                              img = cv2.circle(img,(int(point.x),int(point.y)), 4, (0,255,255), -1)
-                              img = cv2.circle(img,(int(goal.x),int(goal.y)), 10, (0,255,255), -1)
+                              #img = cv2.circle(img,(int(point.x),int(point.y)), 4, (0,255,255), -1)
+                              #img = cv2.circle(img,(int(goal.x),int(goal.y)), 10, (0,255,255), -1)
 
                               rotatedX = 17*math.cos(point.a + math.pi/2) + point.x
                               rotatedY = 17*math.sin(point.a + math.pi/2) + point.y
 
-                              img = cv2.line(img,(int(point.x),int(point.y)),(int(rotatedX),int(rotatedY)),(255,0,0),1)
+                              #img = cv2.line(img,(int(point.x),int(point.y)),(int(rotatedX),int(rotatedY)),(255,0,0),1)
                         
                               self.count = len(self.Waypoints)-1
                               #print(len(self.goals))
@@ -384,6 +416,8 @@ class RrtStar:
 
             #img = cv2.putText(img, str(self.Waypoints[self.count].parent), (int(self.Waypoints[self.Waypoints[self.count].parent].x),int(self.Waypoints[self.Waypoints[self.count].parent].y)), font,  fontScale, color, thickness, cv2.LINE_AA) 
             #img = cv2.line(img,(int(x),int(y)),(int(self.Waypoints[self.Waypoints[self.count].parent].x),int(self.Waypoints[self.Waypoints[self.count].parent].y)),(255,255,255),1)
+            cv2.imshow("Image", img)
+            cv2.waitKey(1)
 
             if(a != -999):
                a1 = self.eulerAuto + a
@@ -537,14 +571,15 @@ class RrtStar:
 
    def checkMain(self, p, p1, img):
       ch = False
+      
       car = self.getLocalCar((p.x, p.y), p.a, self.width, self.height, img)
-      img = cv2.circle(img,(int(p.x), int(p.y)), 2, (255,0,0), -1)
+      #img = cv2.circle(img,(int(p.x), int(p.y)), 2, (255,0,0), -1)
       ch0 = self.checkTouch(car, self.width, self.height)
       #print("ПРОВЕРКА препядствий", ch0)
 
       for j in range(len(car)): 
          None        
-         img = cv2.circle(img,(int(car[j][0]), int(car[j][1])), 2, (0,0,255), -1)
+         #img = cv2.circle(img,(int(car[j][0]), int(car[j][1])), 2, (0,0,255), -1)
 
       check = self.checkR([p.x, p.y, p.a], p1)
       #print(check)
@@ -558,23 +593,23 @@ class RrtStar:
 
       if check[0] and ch1:
          ch = True
-         img = cv2.circle(img,(int(p1[0]), int(p1[1])), 2, (0,0,255), -1)
+        #img = cv2.circle(img,(int(p1[0]), int(p1[1])), 2, (0,0,255), -1)
          #print("ПРОВЕРКА препядствий 1", ch1)
 
          for j in range(len(car1)): 
             None        
-            img = cv2.circle(img,(int(car1[j][0]), int(car1[j][1])), 2, (0,0,255), -1)
+            #img = cv2.circle(img,(int(car1[j][0]), int(car1[j][1])), 2, (0,0,255), -1)
 
       return [ch, check]
 
 
    def getLocalCar(self, p, angle, width, height, img):
-
+      inc = 0
       whCar = (40,80)
-      car = [[p[0] - whCar[0]/2 + abs(width/2 - self.start.x), p[1] + whCar[1]/2 + abs(height/2 - self.start.y)],
-             [p[0] + whCar[0]/2 + abs(width/2 - self.start.x), p[1] + whCar[1]/2 + abs(height/2 - self.start.y)],
-             [p[0] + whCar[0]/2 + abs(width/2 - self.start.x), p[1] - whCar[1]/2 + abs(height/2 - self.start.y)], 
-             [p[0] - whCar[0]/2 + abs(width/2 - self.start.x), p[1] - whCar[1]/2 + abs(height/2 - self.start.y)]]
+      car = [[p[0] - whCar[0]/2 + abs(width/2 - self.start.x), p[1] + whCar[1]/2 + abs(height/2 - self.start.y) + inc],
+             [p[0] + whCar[0]/2 + abs(width/2 - self.start.x), p[1] + whCar[1]/2 + abs(height/2 - self.start.y) + inc],
+             [p[0] + whCar[0]/2 + abs(width/2 - self.start.x), p[1] - whCar[1]/2 + abs(height/2 - self.start.y) + inc], 
+             [p[0] - whCar[0]/2 + abs(width/2 - self.start.x), p[1] - whCar[1]/2 + abs(height/2 - self.start.y) + inc]]
       
       seg = 8
       car = self.getInterCar(car, seg)
@@ -963,7 +998,7 @@ class CreateLocalRrt(Node):
       '/local_cost_map', 
       self.local_map_collback, 
       1)
-
+    self.nav_status_pub = self.create_publisher(String, '/nav_status', 10)
     #print(self.current_map)
 
     self.start = np.empty((0,3))
@@ -1182,10 +1217,16 @@ class CreateLocalRrt(Node):
              #print("planning")
              #print(startPoint)
              if np.any(startPoint) != None:
-              #print("endPoints", endPoints)
-              rrtStar = RrtStar((startPoint), endPoints, 20, imageMapArr, 40, 100, self.eulerAuto, self.posX, self.posY, self.waypoint_publisher, 55, 70)
+
+              msg = String()
+              msg.data = "Stop"
+              self.nav_status_pub.publish(msg)
+                            
+              rrtStar = RrtStar((startPoint), endPoints, 20, imageMapArr, 50, 100, self.eulerAuto, self.posX, self.posY, self.waypoint_publisher, 55, 70)
               print("GO")
+              
               path, correctGoal = rrtStar.planning()
+
               print("goal", correctGoal)
               x = startPoint[0]
               y = startPoint[1]
@@ -1199,10 +1240,12 @@ class CreateLocalRrt(Node):
              #print(self.pathArr)
               print(np.any(correctGoal))
               if np.any(correctGoal) != None:
-               #print(path[0])
                
                self.pathArr = np.delete(self.pathArr, np.s_[0:int(correctGoal[3]+2)], axis = 0)
                self.pathArr = np.insert(self.pathArr, 0, path, axis = 0)
+               msg = String()
+               msg.data = "Go"
+               self.nav_status_pub.publish(msg)
               
              
          
@@ -1404,6 +1447,7 @@ class CreateLocalRrt(Node):
       #print(self.mapArr)
       self.carX = data.info.origin.position.x
       self.carY = data.info.origin.position.y
+      print(self.carX, self.carY)
 
    def IsPointInCircle(self, x, y, xc, yc, r):
       return ((x-xc)**2+(y-yc)**2) ** 0.5 <= r

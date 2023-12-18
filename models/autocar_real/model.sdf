@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<sdf version="1.5">
+
+  <model name="autocar">
+    <pose>0 0 0.0 0 0 0</pose>
+   
+    <link name="odometry" />
+    
+    <joint name="velodyne_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>velodyne</child>
+      <pose>0 1.5 1.85 0 0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    <joint name="odom_joint" type="fixed">
+      <parent>odometry</parent>
+      <child>base_link</child>
+      <pose>0 1.5 0 0 0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    <joint name="front_camera_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>front_camera_link</child>
+      <pose>0 1.5 1.75 0 0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    <link name='base_link' />
+  
+  <link name="front_camera_link">
+
+
+  <visual name="camera_visual">
+    <pose relative_to='front_camera_joint'> 0 0 0 0 0 0 </pose>
+    <geometry>
+      <box>
+        <size>0.015 0.08 0.022</size>
+      </box>
+    </geometry>
+    <material>
+      <ambient>0 0 0 1.0</ambient>
+      <diffuse>0 0 0 1.0</diffuse>
+      <specular>0.0 0.0 0.0 1.0</specular>
+      <emissive>0.0 0.0 0.0 1.0</emissive>
+    </material>
+  </visual> 
+ 
+  </link>
+  <link name="velodyne">
+    <pose>0 0 0 0 0 0</pose>
+
+      <inertial>
+        <pose relative_to='velodyne_joint'> 0 0 0 0 0 0 </pose>
+        <mass>1.01</mass>
+        <inertia>
+          <ixx>0.00219251</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00219251</iyy>
+          <iyz>0</iyz>
+          <izz>0.000910464</izz>
+        </inertia>
+      </inertial>
+           
+      <collision name='base_link_fixed_joint_lump__velodyne2_base_link_collision'>
+         <pose relative_to='velodyne_joint'> 0 0 0 0 0 0 </pose>
+        <geometry>
+          <cylinder>
+            <length>0.14424</length>
+            <radius>0.04267</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      
+      <visual name='base_link_fixed_joint_lump__velodyne2_base_link_visual'>
+        <pose relative_to='velodyne_joint'> 0 0 0 0 0 0 </pose>
+        <geometry>
+          <cylinder>
+            <length>0.14424</length>
+            <radius>0.04267</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+
+  </model>
+
+</sdf>

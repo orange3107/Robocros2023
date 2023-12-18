@@ -6,15 +6,38 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 # find dependencies
+
+
+find_package(rclcpp REQUIRED)
 find_package(ament_cmake REQUIRED)
 find_package(rclpy REQUIRED)
 find_package(gazebo_ros REQUIRED)
-find_package(rclcpp REQUIRED)
+find_package(pcl_conversions REQUIRED)
+find_package(PCL 1.10 REQUIRED)
+
+find_package(nav_msgs REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(camera_info_manager REQUIRED)
+find_package(image_transport REQUIRED)
+find_package(camera_calibration_parsers REQUIRED)
+find_package(OpenCV REQUIRED)
 
 add_executable(rrtStar scripts/rrtStar.cpp)
 ament_target_dependencies(rrtStar rclcpp std_msgs)
 
+add_executable(create_local_map scripts/create_local_map.cpp)
+ament_target_dependencies(create_local_map
+
+  "sensor_msgs"
+  "rclcpp"
+  "pcl_conversions"
+  "OpenCV"
+  "nav_msgs"
+)
+
 install(TARGETS
+  create_local_map
   rrtStar
   DESTINATION lib/${PROJECT_NAME})
 
@@ -26,6 +49,7 @@ endif()
 
 install(
   PROGRAMS
+  scripts/create_local_map.cpp
   scripts/rrtStar.cpp
   scripts/create_path.py
   scripts/local_rrt_star.py
@@ -34,16 +58,19 @@ install(
   scripts/car_in_global_map.py
   scripts/static_turtle_tf2_broadcaster.py
   scripts/transforms.py
+  scripts/transforms_new.py
   scripts/teleop.py
   scripts/create_local_cost_map.py
   scripts/create_local_cost_map_old.py
-  scripts/create_local_cost_map_new.py
+  scripts/create_local_cost_map_real.py
   scripts/test_r_auto.py
+  scripts/calc_odom.py
   scripts/spawn_global_map.py
   scripts/pcd_to_map.py
   scripts/spawn_robot.py
   scripts/surf.py
   scripts/calc_odom.py
+  scripts/ser_move.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

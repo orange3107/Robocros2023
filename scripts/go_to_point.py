@@ -134,7 +134,6 @@ class GoToPoint(Node):
       VecGoalY = self.goalPosY - self.y
       engleGoaltoAuto = math.atan2(VecAutoX*VecGoalY - VecAutoY*VecGoalX, VecAutoX*VecGoalX + VecAutoY*VecGoalY)
 
-
       if abs(engleGoaltoAuto) < math.pi/2 :
         linearSp = 0.3
         if engleGoaltoAuto < 0:
@@ -166,12 +165,10 @@ class GoToPoint(Node):
         else:
           self.tergetEngle = 0.0
 
-        self.tergetEngle = 8*self.tergetEngle
+        self.tergetEngle = 4*self.tergetEngle
 
       
     print(self.tergetEngle)
-    
-    
     
     #print(engleGoaltoAuto*180/math.pi)
     msg = Float32()

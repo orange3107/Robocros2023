@@ -29,9 +29,9 @@ from tf2_ros import TransformException
 from geometry_msgs.msg import Twist
 from geometry_msgs.msg import PointStamped
 import csv
-
-from std_msgs.msg import Float32
 from nav_msgs.msg import Path
+from geometry_msgs.msg import PoseStamped
+from std_msgs.msg import Float32
 
 
 
@@ -42,32 +42,25 @@ class GoToPoint(Node):
     
     super().__init__('go_to_point')
 
+    self.global_path_publisher = self.create_subscription(Path, '/global_path', self.global_path, 10)
+
     self.publisherEngleGoaltoAuto = self.create_publisher(Float32, '/angle_auto_point', 10)
 
     self.subscription = self.create_subscription(
       Marker, 
-      '/poseAuto', 
+      '/odomAuto', 
       self.listener_callback, 
       10)
+    
     self.pathArr = np.empty((0,2))
-    with open('/home/ilya22/ros2_humble/src/robocross2023/paths/path1.csv', 'r') as file:
-     reader = csv.reader(file)
-     for index, line in enumerate(reader):
-       if(index > 0):
-        x = float(line[0])
-        y = float(line[1])
-        self.pathArr = np.append(self.pathArr, [[x, y]], axis=0)
-     
-    print(self.pathArr) 
-    #self.point_pub = self.create_subscription(PointStamped, '/clicked_point', self.listener_goal, 10)
-
-    self.sub_path = self.create_subscription(Path, '/pathWay', self.listener_path, 10)
+    
+    self.point_pub = self.create_subscription(PointStamped, '/clicked_point', self.listener_goal, 10)
 
     self.pubTwist = self.create_publisher(Twist, '/autocar/cmd_vel', 10)
     
     self.tfBuffer = tf2_ros.Buffer()
     self.tf = TransformListener(self.tfBuffer, self)
-    print("go")
+    #print("go")
     self.pubposemarker = self.create_publisher(Marker, '/goalPoint', 1)
     timer_period = 0.25
     self.timer = self.create_timer(timer_period, self.on_timer)
@@ -77,7 +70,12 @@ class GoToPoint(Node):
     self.tergetEngle = 0.0
     self.goalPosX = None
     self.goalPosY = None
+    self.goalAngle = None
     self.i = 0
+
+  def global_path(self, data):
+    self.pathArr = data.poses
+
 
   def listener_callback(self, data):
     self.x = data.pose.position.x
@@ -85,99 +83,72 @@ class GoToPoint(Node):
     euler = euler_from_quaternion(data.pose.orientation.x, data.pose.orientation.y, data.pose.orientation.z, data.pose.orientation.w)
 
     self.engleAuto = euler[2] 
-    
-    #print(x, y)
 
-  def listener_path(self, data):
-    self.goalPosX = data.poses[0].pose.position.x
-    self.goalPosY = data.poses[0].pose.position.y
-
-
+  def listener_goal(self, data):
+    self.goalPosX = data.point.x
+    self.goalPosY = data.point.y
 
   def on_timer(self):
+    if(len(self.pathArr) > 0):
+      self.goalPosX = self.pathArr[self.i].pose.position.x
+      self.goalPosY = self.pathArr[self.i].pose.position.y
+      self.goalAngle = self.pathArr[self.i].pose.orientation.x
 
-    
-    if self.goalPosX == None:
+    else:
       self.goalPosX = self.x
-      self.goalPosY = self.y
-
-    engleGoaltoAuto = -1
-    VecGoalX = 1.0
-    VecGoalY = 1.0
-    marker = Marker()
-    marker.header.frame_id = "/map"
-    marker.type = marker.SPHERE
-    marker.action = marker.ADD
-    marker.scale.x = 0.2
-    marker.scale.y = 0.2
-    marker.scale.z = 0.2
-    marker.color.a = 1.0
-    marker.color.r = 1.0
-    marker.color.g = 1.0
-    marker.color.b = 0.0
-    if self.goalPosX == None:
-      marker.pose.position.x = self.x
-      marker.pose.position.y = self.y
-    elif self.goalPosX != None:
-      marker.pose.position.x = self.pathArr[self.i][0]
-      marker.pose.position.y = self.pathArr[self.i][1]
-    marker.pose.position.z = 0.0
-    self.pubposemarker.publish(marker)
-
-
-    cEngle = 0.3
-    linearSp = 1.0
-    errEngle = math.pi/25
- 
-    VecAutoX = math.cos(self.engleAuto+ math.pi/2) #вектор авто
-    VecAutoY = math.sin(self.engleAuto+ math.pi/2) 
-
-    self.engleAuto += math.pi/2
-    if self.engleAuto < 0:
-      self.engleAuto = math.pi/2 - abs(self.engleAuto)+ 3*math.pi/2
+      self.goalPosY = self.x
 
     if self.goalPosX != None:
+      
       VecGoalX = self.goalPosX - self.x
       VecGoalY = self.goalPosY - self.y
+      VecAutoX = math.cos(self.engleAuto+ math.pi/2) #вектор авто
+      VecAutoY = math.sin(self.engleAuto+ math.pi/2) 
       engleGoaltoAuto = math.atan2(VecAutoX*VecGoalY - VecAutoY*VecGoalX, VecAutoX*VecGoalX + VecAutoY*VecGoalY)
 
-      if(0 <= engleGoaltoAuto < math.pi/2 or -math.pi/2 <= engleGoaltoAuto < 0):
-        if(engleGoaltoAuto < -errEngle):
-          self.tergetEngle -=cEngle
-        elif(engleGoaltoAuto > errEngle):
-          self.tergetEngle +=cEngle
+      if abs(engleGoaltoAuto) < math.pi/2 :
+        linearSp = 0.3
+        if engleGoaltoAuto < 0:
+          self.tergetEngle = convert(engleGoaltoAuto, 0, -math.pi/2, 0, -0.8)
+
+        elif engleGoaltoAuto > 0:
+          self.tergetEngle = convert(engleGoaltoAuto, 0, math.pi/2, 0, 0.8)
+
         else:
           self.tergetEngle = 0.0
-        linearSp = abs(linearSp)
-        
+        self.tergetEngle = 8*self.tergetEngle
+
       else:
-        if(math.pi/2 < engleGoaltoAuto < math.pi + errEngle):
-          self.tergetEngle -=cEngle
-        elif(engleGoaltoAuto > -math.pi + errEngle):
-          self.tergetEngle +=cEngle
+        if(engleGoaltoAuto > 0):
+            print(math.pi, engleGoaltoAuto)
+            engleGoaltoAuto = (math.pi - engleGoaltoAuto)
+
+        else:
+            engleGoaltoAuto = (-math.pi - engleGoaltoAuto)
+
+
+        linearSp = -0.3
+        if engleGoaltoAuto < 0:
+          self.tergetEngle = -convert(engleGoaltoAuto, 0, -math.pi/2, 0, -0.8)
+
+        elif engleGoaltoAuto > 0:
+          self.tergetEngle = -convert(engleGoaltoAuto, 0, math.pi/2, 0, 0.8)
+
         else:
           self.tergetEngle = 0.0
-        linearSp = -linearSp
 
+        self.tergetEngle = 8*self.tergetEngle
+
+      
     print(self.tergetEngle)
-
     
-    print(engleGoaltoAuto*180/math.pi)
+    #print(engleGoaltoAuto*180/math.pi)
     msg = Float32()
     msg.data = engleGoaltoAuto
     self.publisherEngleGoaltoAuto.publish(msg)
 
-
-    if(self.tergetEngle > 0.8):
-      self.tergetEngle = 0.8
-    
-    if(self.tergetEngle < -0.8):
-      self.tergetEngle = -0.8
-
-    if IsPointInCircle(self.x, self.y, marker.pose.position.x, marker.pose.position.y, 0.5):
-      self.tergetEngle = 0.0
-      linearSp = 0.0
-      self.i += 1
+    if IsPointInCircle(self.x, self.y, self.goalPosX, self.goalPosY, 0.3):
+      self.i += 0
 
     
     twist = Twist()
@@ -190,7 +161,8 @@ class GoToPoint(Node):
     twist.angular.z = self.tergetEngle
 
     self.pubTwist.publish(twist)
-    
+
+
 def checkR(R,pointP, pointC):
       mode = ''
       boolCheck = False
@@ -231,7 +203,13 @@ def angleV1V2(vec1X, vec1Y, vec2X, vec2Y):
 def distance(p1, p2):
       c = math.sqrt((p2[0]-p1[0])**2 + (p2[1]-p1[1])**2)
       return c
-
+    
+def convert(old, old_min, old_max, new_min, new_max):
+  old_range = old_max - old_min  
+  new_range = new_max - new_min  
+  converted = (((old - old_min) * new_range) / old_range) + new_min
+  return converted
+    
 def IsPointInCircle(x, y, xc, yc, r):
     return ((x-xc)**2+(y-yc)**2) ** 0.5 <= r
   
