@@ -32,6 +32,7 @@ import csv
 from nav_msgs.msg import Path
 from geometry_msgs.msg import PoseStamped
 from std_msgs.msg import Float32
+from std_msgs.msg import UInt32MultiArray, Float32, Bool, String
 
 
 
@@ -43,6 +44,8 @@ class GoToPoint(Node):
     super().__init__('go_to_point')
 
     self.global_path_publisher = self.create_subscription(Path, '/global_path', self.global_path, 10)
+
+    self.global_path_publisher_status = self.create_subscription(String, '/nav_status', self.nav_status, 10)
 
     self.publisherEngleGoaltoAuto = self.create_publisher(Float32, '/angle_auto_point', 10)
 
@@ -71,9 +74,15 @@ class GoToPoint(Node):
     self.goalPosX = None
     self.goalPosY = None
     self.i = 0
+    self.navStat = "Stop"
 
   def global_path(self, data):
     self.pathArr = data.poses
+
+  def nav_status(self, data):
+    self.navStat = data.data
+    print(self.navStat)
+
 
 
   def listener_callback(self, data):
@@ -165,7 +174,11 @@ class GoToPoint(Node):
         else:
           self.tergetEngle = 0.0
 
-        self.tergetEngle = 4*self.tergetEngle
+        self.tergetEngle = 8*self.tergetEngle
+
+    if self.navStat == "Stop":
+       linearSp = 0.0
+       
 
       
     print(self.tergetEngle)

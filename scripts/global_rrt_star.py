@@ -742,9 +742,9 @@ class CreateGlobalRrt(Node):
                if(lenghtPath < minLen):
                   minLen = lenghtPath
                   minPath = path
-            
+
             print(minLen, minPath)
-            
+
             with open('/home/ilya22/ros2_humble/src/robocross2023/paths/path1.csv', 'w', newline='') as file:
                writer = csv.writer(file)
                writer.writerow(["X", "Y", "A", "R"])

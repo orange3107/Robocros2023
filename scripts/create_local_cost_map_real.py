@@ -65,12 +65,12 @@ class CreateCostMap(Node):
     len_arr = len(cp_array)
 
     for i in range(len_arr-1, 0, -1):
-        '''      
+            
         if(cp_array[i][2] > -1.6 and cp_array[i][2] < 10 ):
           #print(cp_array[i], i)
           x = cp_array[i][0]*20.0 + width/2
           y = cp_array[i][1]*20.0 + height/2
-          '''
+        
         self.image_map = cv2.circle(self.image_map, (int(cp_array[i][0]), int(cp_array[i][1])), 5, (100,100,100), -1)
     
 

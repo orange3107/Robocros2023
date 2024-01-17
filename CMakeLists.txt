@@ -18,6 +18,7 @@ find_package(PCL 1.10 REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(visualization_msgs REQUIRED)
 find_package(camera_info_manager REQUIRED)
 find_package(image_transport REQUIRED)
 find_package(camera_calibration_parsers REQUIRED)
@@ -36,8 +37,20 @@ ament_target_dependencies(create_local_map
   "nav_msgs"
 )
 
+add_executable(mapping scripts/mapping.cpp)
+ament_target_dependencies(mapping
+
+  "sensor_msgs"
+  "rclcpp"
+  "pcl_conversions"
+  "OpenCV"
+  "nav_msgs"
+  "visualization_msgs"
+)
+
 install(TARGETS
   create_local_map
+  mapping
   rrtStar
   DESTINATION lib/${PROJECT_NAME})
 
@@ -49,7 +62,9 @@ endif()
 
 install(
   PROGRAMS
+  scripts/hybrid_a_star.py
   scripts/create_local_map.cpp
+  scripts/mapping.cpp
   scripts/rrtStar.cpp
   scripts/create_path.py
   scripts/local_rrt_star.py

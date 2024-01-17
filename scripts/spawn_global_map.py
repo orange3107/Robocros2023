@@ -39,7 +39,7 @@ class CreateGlobalMap(Node):
     self.image_map = cv2.rotate(self.image_map, cv2.ROTATE_180)
     self.global_map = self.create_publisher(OccupancyGrid, '/map', 1)
     # Used to convert between ROS and OpenCV images
-    timer_period = 0.5  # seconds
+    timer_period = 0.1  # seconds
     self.timer = self.create_timer(timer_period, self.timer_callback)
 
   def timer_callback(self):
@@ -70,11 +70,11 @@ class CreateGlobalMap(Node):
       if int(img_data_int8array[i]) == 255:
         img_data_int8array[i] = -1
 
-      elif int(img_data_int8array[i]) == 0:
+      elif int(img_data_int8array[i]) == 100:
         print(int(img_data_int8array[i]))
         img_data_int8array[i] = 100
 
-      elif int(img_data_int8array[i]) == 100:
+      elif int(img_data_int8array[i]) == 0:
         print(int(img_data_int8array[i]))
         img_data_int8array[i] = 101
 

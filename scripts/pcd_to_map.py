@@ -52,7 +52,8 @@ class PcdToMap(Node):
       print(height)
       print(width)
       image_map = np.zeros((width,height,3), np.uint8)
-      image_map = cv2.rectangle(image_map, (0, 0), (height, width), (255, 255, 255), -1)
+      image_map = cv2.cvtColor(image_map, cv2.COLOR_BGR2GRAY)
+      #image_map = cv2.rectangle(image_map, (0, 0), (height, width), (255, 255, 255), -1)
 
       
       for i in range(len(pcd_arr)):
@@ -73,24 +74,22 @@ class PcdToMap(Node):
           #print(pcd_arr[i][0])
           #print(pcd_arr[i][1])
           image_map = cv2.rectangle(image_map, (int(pcd_arr[i][0]), int(pcd_arr[i][0] + 1)), (int(pcd_arr[i][1]), int(pcd_arr[i][1]) + 1), (255, 255, 255), -1)
-
-        
       """
       for i in range(len(pcd_arr)):
         if(pcd_arr[i][2] > 0.9 and pcd_arr[i][2] < 2.5):
           print(pcd_arr[i][0])
           print(pcd_arr[i][1])
 
-          image_map = cv2.circle(image_map, (int(pcd_arr[i][0]), int(pcd_arr[i][1])), 40, (100, 100, 100), -1)
+          image_map = cv2.circle(image_map, (int(pcd_arr[i][0]), int(pcd_arr[i][1])), 40, (0, 0, 0), -1)
 
       for i in range(len(pcd_arr)):
         if(pcd_arr[i][2] > 0.9 and pcd_arr[i][2] < 2.5):
           print(pcd_arr[i][0])
           print(pcd_arr[i][1])
 
-          image_map = cv2.circle(image_map, (int(pcd_arr[i][0]), int(pcd_arr[i][1])), 2, (0, 0, 0), -1)
+          image_map = cv2.circle(image_map, (int(pcd_arr[i][0]), int(pcd_arr[i][1])), 2, (100, 100, 100), -1)
 
-      image_map = cv2.cvtColor(image_map, cv2.COLOR_BGR2GRAY)
+      #image_map = cv2.cvtColor(image_map, cv2.COLOR_BGR2GRAY)
       image_map = cv2.flip(image_map,1) 
       image_map = cv2.rotate(image_map, cv2.ROTATE_180)
       cv2.imwrite('/home/ilya22/ros2_humble/src/robocross2023/maps/my_map.pgm', image_map)

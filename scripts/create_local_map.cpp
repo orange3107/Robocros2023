@@ -66,16 +66,16 @@ class LocalMap : public rclcpp::Node
           x = out_pointcloud.points[i].x*20.0 + width/2;
           y = out_pointcloud.points[i].y*20.0 + height/2;
           Point p1(x, y); 
-          cv::circle(map, p1, 5, Scalar(100, 100, 100), -1);
+          cv::circle(map, p1, 10, Scalar(100, 100, 100), -1);
         }
       }
 
-
-        //imshow("Output", map); 
-        //waitKey(1); 
-        
+        //cv::imwrite("/home/ilya22/ros2_humble/src/robocross2023/maps/local_map.pgm", map); 
+        //cv2.imwrite('/home/ilya22/ros2_humble/src/robocross2023/maps/my_map.pgm', image_map)
         float centrX = width/2;
         float centrY = height/2;
+
+        //cv::imwrite("/home/ilya22/ros2_humble/src/robocross2023/maps/local_map.pgm", map);
 
         Mat gray_map = map;
 

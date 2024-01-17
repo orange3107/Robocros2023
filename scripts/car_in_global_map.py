@@ -110,7 +110,7 @@ class CarInGlobalMap(Node):
       marker.pose.orientation.z = trans.transform.rotation.z
       marker.pose.orientation.w = trans.transform.rotation.w
       euler = euler_from_quaternion(trans.transform.rotation.x, trans.transform.rotation.y, trans.transform.rotation.z, trans.transform.rotation.w)
-      print(euler[2])
+      print("Odom", euler[2])
       self.pubodomemarker.publish(marker)
     except TransformException as ex:
         print("err")
